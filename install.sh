@@ -13,7 +13,6 @@ python3 -m pip install neovim
 mkdir $HOME/source
 mkdir $HOME/binary
 mkdir $HOME/projects
-
 # todo: install pyenv
 
 # --- tcc

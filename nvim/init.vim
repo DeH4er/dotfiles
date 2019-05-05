@@ -13,7 +13,7 @@ call dein#add('easymotion/vim-easymotion')
 call dein#add('tpope/vim-dispatch')
 call dein#add('wincent/ferret')
 call dein#add('wellle/targets.vim')
-call dein#add('andreypopp/vim-colors-plain')
+call dein#add('lifepillar/vim-solarized8')
 call dein#add('osyo-manga/vim-over')
 call dein#add('tpope/vim-projectionist')
 call dein#add('Shougo/defx.nvim')
@@ -223,7 +223,7 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 set splitright
 set splitbelow
 set termguicolors
-colors plain
+colors solarized8
 filetype plugin indent on
 syntax on
 
@@ -251,7 +251,7 @@ function! s:find_git_root()
 endfunction
 
 hi TabLine ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#aaaaaa guibg=#1b1918
-hi TabLineFill ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#1b1918 guibg=#ababab
+hi TabLineFill ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#002b36 guibg=#ababab
 hi TabLineSel ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#247dd6 guibg=#ffffff
 hi TabIndex ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#eeeeee guibg=#1b1918
 
@@ -265,9 +265,6 @@ function! MyTabLine()
     else
       let s .= '%#TabLine# '
     endif
-
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T'
 
     " the label is made by MyTabLabel()
     let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
@@ -288,7 +285,14 @@ endfunction
 function! MyTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
-  return bufname(buflist[winnr - 1])
+  let buffername = bufname(buflist[winnr - 1])
+
+  if buffername == ''
+    return '<empty>'
+  endif
+
+  let label = fnamemodify(buffername, ':t')
+  return label
 endfunction
 
 
