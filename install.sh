@@ -9,12 +9,16 @@ sudo npm i -g typescript neovim
 python2 -m pip install neovim
 python3 -m pip install neovim
 
+# --- structure
+mkdir $HOME/source
+mkdir $HOME/binary
+mkdir $HOME/projects
+
 # todo: install pyenv
 
-# todo: install tcc
-# todo: install st
-# todo: install dwm
-# todo: install dmenu
+# --- tcc
+chmod +x ./tcc/install.sh
+./tcc/install.sh
 
 # --- zsh
 chmod +x ./zsh/install.sh
@@ -28,7 +32,15 @@ chmod +x ./nvim/install.sh
 chmod +x ./tmux/install.sh
 ./tmux/install.sh
 
-# --- structure
-mkdir $HOME/source
-mkdir $HOME/binary
-mkdir $HOME/projects
+# --- dwm
+chmod +x ./dwm/install.sh
+./dwm/install.sh
+
+# --- st
+chmod +x ./st/install.sh
+./st/install.sh
+
+# --- dmenu
+chmod +x ./dmenu/install.sh
+./dmenu/install.sh
+
