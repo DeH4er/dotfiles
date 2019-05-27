@@ -13,14 +13,17 @@ call dein#add('easymotion/vim-easymotion')
 call dein#add('tpope/vim-dispatch')
 call dein#add('wincent/ferret')
 call dein#add('wellle/targets.vim')
-call dein#add('lifepillar/vim-solarized8')
+call dein#add('morhetz/gruvbox')
 call dein#add('osyo-manga/vim-over')
 call dein#add('tpope/vim-projectionist')
 call dein#add('Shougo/defx.nvim')
 call dein#add('SirVer/ultisnips')
 call dein#add('plasticboy/vim-markdown')
-call dein#add('tpope/vim-obsession')
-call dein#add('mattn/emmet-vim')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-repeat')
+call dein#add('junegunn/goyo.vim')
+call dein#add('itchyny/lightline.vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -37,10 +40,18 @@ let mapleader=" "
 let g:UltiSnipsEditSplit="tabdo"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
 
-let g:user_emmet_mode='a'    "enable all function in all mode.
-let g:user_emmet_install_global = 0
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
-autocmd FileType html,css EmmetInstall
+
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_smartcase = 1
+
+let g:goyo_width = 120
+let g:goyo_height = '100%'
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+nnoremap <silent> <leader>a :Goyo<CR>
 
 " config
 nnoremap <silent> <leader>ec :tabedit ~/.config/nvim/init.vim<CR>
@@ -83,10 +94,17 @@ vnoremap , /
 vnoremap / <nop>
 nmap s <Plug>(easymotion-overwin-f2)
 
+" tab movement
 nnoremap <silent> <leader>,t :tabp<cr>
 nnoremap <silent> <leader>.t :tabn<cr>
 nnoremap <silent> <leader>,T :tabclose<cr>
 nnoremap <silent> <leader>.T :tabnew<cr>
+
+" quickfix movement
+nnoremap <silent> <leader>,c :cp<cr>
+nnoremap <silent> <leader>.c :cn<cr>
+nnoremap <silent> <leader>,C :cclose<cr>
+nnoremap <silent> <leader>.C :copen<cr>
 
 " clipboard
 nnoremap <leader>p "+p
@@ -104,6 +122,7 @@ nnoremap <leader>c *``cgn
 " definition
 nmap gd <Plug>(coc-definition)
 nmap <leader>i <Plug>(coc-fix-current)
+nmap <leader>r <Plug>(coc-references)
 
 " open terminal
 nnoremap <silent> <leader>' :sp<CR><C-w>J:res 10<cr>:ProjectDo terminal<CR>i
@@ -112,14 +131,25 @@ nnoremap <silent> <leader>" :sp<CR><C-w>J:res 10<cr>:terminal<CR>i
 " kill terminal without prompting exit status
 au TermClose * exe 'bd!'
 
+au FileType c setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
+au FileType python setlocal
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ fileformat=unix
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
 " projectionist jump to alternate file
 nnoremap <silent> <leader>gt :Etest<CR>
-nnoremap <silent> <leader>gh :Ehtmlcomponent<CR>
+nnoremap <silent> <leader>gh :Ehtml<CR>
 nnoremap <silent> <leader>gs :Esource<CR>
 
 " normal mode on esc in terminal
 tnoremap <esc> <C-\><C-n>
-tnoremap jk <C-\><C-n>
 
 " open defx file manager
 nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=30 -direction=topleft<CR>
@@ -197,6 +227,7 @@ call defx#custom#column('filename', {
     \ 'root_marker_highlight': 'Ignore',
     \ })
 
+set colorcolumn=81
 set hidden
 set nowrap
 set tabstop=2
@@ -223,7 +254,8 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 set splitright
 set splitbelow
 set termguicolors
-colors solarized8
+set noshowmode
+colors gruvbox
 filetype plugin indent on
 syntax on
 
@@ -250,11 +282,15 @@ function! s:find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-hi TabLine ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#aaaaaa guibg=#1b1918
-hi TabLineFill ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#002b36 guibg=#ababab
-hi TabLineSel ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#247dd6 guibg=#ffffff
-hi TabIndex ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#eeeeee guibg=#1b1918
+" tab highlighting
+function! HighlightTabLine()
+  hi TabLine ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#aaaaaa guibg=#1b1918
+  hi TabLineFill ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#282828 guibg=#ababab
+  hi TabLineSel ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#689d6a guibg=#ffffff
+  hi TabIndex ctermfg=235 ctermbg=235 gui=reverse,bold guifg=#eeeeee guibg=#1b1918
+endfunction
 
+" custom tab line
 function! MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
@@ -282,6 +318,7 @@ function! MyTabLine()
   return s
 endfunction
 
+" tab label
 function! MyTabLabel(n)
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
@@ -295,5 +332,14 @@ function! MyTabLabel(n)
   return label
 endfunction
 
-
 set tabline=%!MyTabLine()
+call HighlightTabLine()
+
+function! s:goyo_enter()
+endfunction
+
+function! s:goyo_leave()
+  set showtabline=1
+  set tabline=%!MyTabLine()
+  call HighlightTabLine()
+endfunction
