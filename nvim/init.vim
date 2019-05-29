@@ -13,17 +13,17 @@ call dein#add('easymotion/vim-easymotion')
 call dein#add('tpope/vim-dispatch')
 call dein#add('wincent/ferret')
 call dein#add('wellle/targets.vim')
-call dein#add('morhetz/gruvbox')
+call dein#add('gruvbox-community/gruvbox')
 call dein#add('osyo-manga/vim-over')
 call dein#add('tpope/vim-projectionist')
 call dein#add('Shougo/defx.nvim')
 call dein#add('SirVer/ultisnips')
-call dein#add('plasticboy/vim-markdown')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
 call dein#add('junegunn/goyo.vim')
 call dein#add('itchyny/lightline.vim')
+call dein#add('raghur/vim-ghost')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -93,6 +93,9 @@ nnoremap / <nop>
 vnoremap , /
 vnoremap / <nop>
 nmap s <Plug>(easymotion-overwin-f2)
+
+nnoremap n nzz
+nnoremap N Nzz
 
 " tab movement
 nnoremap <silent> <leader>,t :tabp<cr>
