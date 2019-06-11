@@ -11,7 +11,6 @@ call dein#add('kien/ctrlp.vim')
 call dein#add('mhinz/vim-startify')
 call dein#add('easymotion/vim-easymotion')
 call dein#add('tpope/vim-dispatch')
-call dein#add('wincent/ferret')
 call dein#add('wellle/targets.vim')
 call dein#add('gruvbox-community/gruvbox')
 call dein#add('osyo-manga/vim-over')
@@ -24,6 +23,8 @@ call dein#add('tpope/vim-repeat')
 call dein#add('junegunn/goyo.vim')
 call dein#add('itchyny/lightline.vim')
 call dein#add('raghur/vim-ghost')
+call dein#add('dyng/ctrlsf.vim')
+call dein#add('liuchengxu/vista.vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -42,14 +43,29 @@ let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
 
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
+let g:ctrlsf_default_root = 'project'
+
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
 let g:goyo_width = 120
 let g:goyo_height = '100%'
+
 let g:lightline = {
       \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \     'gitbranch': 'fugitive#head'
+      \   },
       \ }
+
+let g:vista_default_executive = 'coc'
 
 nnoremap <silent> <leader>a :Goyo<CR>
 
@@ -70,22 +86,42 @@ nnoremap <leader>q <c-w>q
 nnoremap <silent> <leader>ll :nohlsearch<CR>
 nnoremap < <<
 nnoremap > >>
+"
 " shift and keep selection
 vnoremap < <gv
 vnoremap > >gv
+"
+" move lines
+nnoremap <silent> <leader>j :m .+1<cr>
+nnoremap <silent> <leader>k :m .-2<cr>
+vnoremap <silent> <leader>j :m '>+1<cr>gv=gv
+vnoremap <silent> <leader>k :m '<-2<cr>gv=gv
 
-nnoremap U <c-r>
 vnoremap <silent> <C-a> :call Incr()<CR>
 inoremap jk <esc>
 
 " used with projectionist to send tests to tmux
 nnoremap <silent> <leader>s :Dispatch!<CR><CR>
 
-" buffer movement
+" window movement
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 nnoremap <C-h> <C-W>h
+
+" create windows
+nnoremap <silent> <leader>.w :vs<cr>
+nnoremap <silent> <leader>,w :vs<cr><c-w>h
+nnoremap <silent> <leader>.W :sp<cr>
+nnoremap <silent> <leader>,W :sp<cr><c-w>k
+
+" resize windows
+let dw = 15
+nnoremap <silent> <leader>,r :exe "vertical resize " . (winwidth(0) - dw)<CR>
+nnoremap <silent> <leader>.r :exe "vertical resize " . (winwidth(0) + dw)<CR>
+nnoremap <silent> <leader>,R :exe "resize " . (winheight(0) - dw)<CR>
+nnoremap <silent> <leader>.R :exe "resize " . (winheight(0) + dw)<CR>
+nnoremap <leader><leader> <c-w>=
 
 " better movement
 nnoremap , /
@@ -93,9 +129,6 @@ nnoremap / <nop>
 vnoremap , /
 vnoremap / <nop>
 nmap s <Plug>(easymotion-overwin-f2)
-
-nnoremap n nzz
-nnoremap N Nzz
 
 " tab movement
 nnoremap <silent> <leader>,t :tabp<cr>
@@ -117,9 +150,10 @@ vnoremap <leader>y "+y
 nnoremap <leader>o :CtrlP<CR>
 
 " find and replace
-nnoremap <silent> <Leader>f :call VisualFindAndReplace()<CR>
-xnoremap <silent> <Leader>f :call VisualFindAndReplaceWithSelection()<CR>
+nnoremap <silent> <leader>f :call VisualFindAndReplace()<CR>
+xnoremap <silent> <leader>f :call VisualFindAndReplaceWithSelection()<CR>
 
+" change word under the cursor
 nnoremap <leader>c *``cgn
 
 " definition
@@ -134,7 +168,7 @@ nnoremap <silent> <leader>" :sp<CR><C-w>J:res 10<cr>:terminal<CR>i
 " kill terminal without prompting exit status
 au TermClose * exe 'bd!'
 
-au FileType c setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
+au FileType c,cpp setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
 au FileType python setlocal
     \ tabstop=4
     \ softtabstop=4
@@ -151,84 +185,106 @@ nnoremap <silent> <leader>gt :Etest<CR>
 nnoremap <silent> <leader>gh :Ehtml<CR>
 nnoremap <silent> <leader>gs :Esource<CR>
 
+nnoremap <leader>ag :CtrlSF ''<left>
+vmap <leader>ag <Plug>CtrlSFVwordExec
+
 " normal mode on esc in terminal
 tnoremap <esc> <C-\><C-n>
 
 " open defx file manager
-nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=30 -direction=topleft<CR>
+nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=35 -direction=topleft<CR>
+
 " defx keybindings
 autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
+
+    " open file {
     nnoremap <silent><buffer><expr> <CR>
-    \ defx#do_action('open')
-	  nnoremap <silent><buffer><expr> c
+    \ defx#is_directory() ?
+      \ defx#do_action("open_directory") : 
+      \ defx#do_action('open', 'tabnew')
+
+    nnoremap <silent><buffer><expr> L
+    \ defx#is_directory() ?
+      \ defx#do_action('open_or_close_tree') :
+      \ defx#do_action('drop')
+
+    nnoremap <silent><buffer><expr> l
+    \ defx#is_directory() ?
+      \ defx#do_action('open_or_close_tree') :
+      \ defx#do_action('open', 'vsplit')
+
+	  nnoremap <silent><buffer><expr> y
 	  \ defx#do_action('copy')
+
 	  nnoremap <silent><buffer><expr> m
 	  \ defx#do_action('move')
+
 	  nnoremap <silent><buffer><expr> p
 	  \ defx#do_action('paste')
-	  nnoremap <silent><buffer><expr> l
-    \ defx#is_directory() ?
-    \ defx#do_action('open_or_close_tree') :
-    \ defx#do_action('drop')
-	  nnoremap <silent><buffer><expr> E
-	  \ defx#do_action('open', 'vsplit')
-	  nnoremap <silent><buffer><expr> P
-	  \ defx#do_action('open', 'pedit')
+
+	  nnoremap <silent><buffer><expr> d
+	  \ defx#do_action('remove')
+
+	  nnoremap <silent><buffer><expr> r
+	  \ defx#do_action('rename')
+
 	  nnoremap <silent><buffer><expr> K
 	  \ defx#do_action('new_directory')
+
 	  nnoremap <silent><buffer><expr> N
 	  \ defx#do_action('new_file')
+
 	  nnoremap <silent><buffer><expr> M
 	  \ defx#do_action('new_multiple_files')
+
 	  nnoremap <silent><buffer><expr> C
 	  \ defx#do_action('toggle_columns',
 	  \                'mark:indent:icon:filename:type:size:time')
+
 	  nnoremap <silent><buffer><expr> S
 	  \ defx#do_action('toggle_sort', 'time')
-	  nnoremap <silent><buffer><expr> d
-	  \ defx#do_action('remove')
-	  nnoremap <silent><buffer><expr> r
-	  \ defx#do_action('rename')
-	  nnoremap <silent><buffer><expr> !
-	  \ defx#do_action('execute_command')
-	  nnoremap <silent><buffer><expr> x
-	  \ defx#do_action('execute_system')
-	  nnoremap <silent><buffer><expr> yy
-	  \ defx#do_action('yank_path')
+
 	  nnoremap <silent><buffer><expr> .
 	  \ defx#do_action('toggle_ignored_files')
-	  nnoremap <silent><buffer><expr> ;
-	  \ defx#do_action('repeat')
-	  nnoremap <silent><buffer><expr> h
-	  \ defx#do_action('cd', ['..'])
-	  nnoremap <silent><buffer><expr> ~
-	  \ defx#do_action('cd')
-	  nnoremap <silent><buffer><expr> q
-	  \ defx#do_action('quit')
-	  nnoremap <silent><buffer><expr> <Space>
-	  \ defx#do_action('toggle_select') . 'j'
+
+	  nnoremap <silent><buffer><expr> s
+	  \ defx#do_action('toggle_select')
+
 	  nnoremap <silent><buffer><expr> *
 	  \ defx#do_action('toggle_select_all')
-	  nnoremap <silent><buffer><expr> j
-	  \ line('.') == line('$') ? 'gg' : 'j'
-	  nnoremap <silent><buffer><expr> k
-	  \ line('.') == 1 ? 'G' : 'k'
+
+	  nnoremap <silent><buffer><expr> ;
+	  \ defx#do_action('execute_command')
+
+	  nnoremap <silent><buffer><expr> x
+	  \ defx#do_action('execute_system')
+
+	  nnoremap <silent><buffer><expr> yy
+	  \ defx#do_action('yank_path')
+
+	  nnoremap <silent><buffer><expr> .
+	  \ defx#do_action('repeat')
+
+	  nnoremap <silent><buffer><expr> h
+	  \ defx#do_action('cd', ['..'])
+
+	  nnoremap <silent><buffer><expr> q
+	  \ defx#do_action('quit')
+
 	  nnoremap <silent><buffer><expr> <C-l>
 	  \ defx#do_action('redraw')
+
 	  nnoremap <silent><buffer><expr> <C-g>
 	  \ defx#do_action('print')
+
 	  nnoremap <silent><buffer><expr> cd
 	  \ defx#do_action('change_vim_cwd')
 	endfunction
 
-" cuz why not?
 call defx#custom#option('_', {
-    \ 'root_marker': 'rm -rf ',
-    \ })
-call defx#custom#column('filename', {
-    \ 'root_marker_highlight': 'Ignore',
-    \ })
+      \ 'root_marker': 'rm -rf ',
+      \ })
 
 set colorcolumn=81
 set hidden
@@ -261,6 +317,9 @@ set noshowmode
 colors gruvbox
 filetype plugin indent on
 syntax on
+
+set diffopt+=indent-heuristic
+set diffopt+=algorithm:patience
 
 function! VisualFindAndReplace()
     :OverCommandLine%s/
