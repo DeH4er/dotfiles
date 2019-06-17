@@ -25,6 +25,7 @@ call dein#add('itchyny/lightline.vim')
 call dein#add('raghur/vim-ghost')
 call dein#add('dyng/ctrlsf.vim')
 call dein#add('liuchengxu/vista.vim')
+call dein#add('junegunn/limelight.vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -184,6 +185,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 nnoremap <silent> <leader>gt :Etest<CR>
 nnoremap <silent> <leader>gh :Ehtml<CR>
 nnoremap <silent> <leader>gs :Esource<CR>
+nnoremap <silent> <leader>gc :Ecss<CR>
 
 nnoremap <leader>ag :CtrlSF ''<left>
 vmap <leader>ag <Plug>CtrlSFVwordExec
@@ -398,9 +400,11 @@ set tabline=%!MyTabLine()
 call HighlightTabLine()
 
 function! s:goyo_enter()
+  exe "norm! :Limelight\<cr>"
 endfunction
 
 function! s:goyo_leave()
+  exe "norm! :Limelight!\<cr>"
   set showtabline=1
   set tabline=%!MyTabLine()
   call HighlightTabLine()
