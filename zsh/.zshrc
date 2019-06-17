@@ -1,14 +1,14 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
 
 # Path to your oh-my-zsh installation.
-  export ZSH="/home/denis/.oh-my-zsh"
+  export ZSH="/home/denys/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="better-kardan"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -64,7 +64,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  virtualenvwrapper
+  pyenv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -86,9 +86,6 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -97,23 +94,43 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim=nvim
-source /etc/profile.d/autojump.zsh
-export EDITOR=nvim
-export VISUAL=nvim
-export TERMINAL=st
-alias fzkill=$'ps -aux | fzy | awk \'{print $2}\' | xargs kill'
-alias r=ranger
-export FZF_DEFAULT_COMMAND='rg --files'
 
-print_colorscheme () {
-  echo -e "\033[0mNC (No color)"
-  echo -e "\033[1;37mWHITE\t\033[0;30mBLACK"
-  echo -e "\033[0;34mBLUE\t\033[1;34mLIGHT_BLUE"
-  echo -e "\033[0;32mGREEN\t\033[1;32mLIGHT_GREEN"
-  echo -e "\033[0;36mCYAN\t\033[1;36mLIGHT_CYAN"
-  echo -e "\033[0;31mRED\t\033[1;31mLIGHT_RED"
-  echo -e "\033[0;35mPURPLE\t\033[1;35mLIGHT_PURPLE"
-  echo -e "\033[0;33mYELLOW\t\033[1;33mLIGHT_YELLOW"
-  echo -e "\033[1;30mGRAY\t\033[0;37mLIGHT_GRAY"
+function rmd() {
+  pandoc $1 | lynx -vikeys -stdin
 }
+
+function cmk() {
+  mkdir -p $1 && cd $1
+}
+
+alias mkdir="echo 'Use cmk instead' && mkdir"
+
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gca="git commit --amend"
+alias gcan="git commit --amend --no-edit"
+alias gp="git push"
+alias gd="git diff"
+alias gm="git merge"
+alias gpl="git pull"
+alias co="git checkout"
+
+alias pa="pyenv activate"
+alias pd="pyenv deactivate"
+
+alias v=nvim
+export EDITOR=nvim
+export PATH="$HOME/.pyenv/bin:$PATH"
+export PATH="$HOME/npm/bin:$PATH"
+export NODE_PATH="$HOME/npm/lib/node_modules:$NODE_PATH"
+export TERM=st-256color
+
+alias tmux="tmux -2"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export LYNX_CFG=~/.lynxrc
+export LYNX_LSS=$HOME/lynx.lss
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
