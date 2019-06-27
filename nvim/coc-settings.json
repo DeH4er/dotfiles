@@ -1,3 +1,5 @@
 {
-  "tsserver.orgnizeImportOnSave": true
+  "tsserver.orgnizeImportOnSave": true,
+  "html.enable": true,
+  "html.format.enable": true
 }

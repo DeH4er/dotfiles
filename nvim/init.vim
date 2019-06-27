@@ -26,11 +26,15 @@ call dein#add('raghur/vim-ghost')
 call dein#add('dyng/ctrlsf.vim')
 call dein#add('liuchengxu/vista.vim')
 call dein#add('junegunn/limelight.vim')
+call dein#add('reedes/vim-pencil')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
 call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
 call dein#add('neoclide/coc-tsserver', {'build': 'yarn install --frozen-lockfile'})
+call dein#add('neoclide/coc-tslint-plugin', {'build': 'yarn install --frozen-lockfile'})
+call dein#add('neoclide/coc-json', {'build': 'yarn install --frozen-lockfile'})
+call dein#add('iamcco/coc-angular', {'build': 'yarn install --frozen-lockfile'})
 
 call dein#end()
 call dein#save_state()
