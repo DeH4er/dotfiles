@@ -1,4 +1,4 @@
 #!/bin/sh
-url=`dmenu < ~/projects/dotfiles/scripts/bookmarks` && surftabbed "$url"
+url=`dmenu < ~/source/dotfiles/scripts/bookmarks` && surftabbed "$url"
 
 

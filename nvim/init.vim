@@ -22,19 +22,21 @@ call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
 call dein#add('junegunn/goyo.vim')
 call dein#add('itchyny/lightline.vim')
-call dein#add('raghur/vim-ghost')
 call dein#add('dyng/ctrlsf.vim')
 call dein#add('liuchengxu/vista.vim')
 call dein#add('junegunn/limelight.vim')
 call dein#add('reedes/vim-pencil')
+call dein#add('AndrewRadev/sideways.vim')
+call dein#add('ElmCast/elm-vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
 call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
-call dein#add('neoclide/coc-tsserver', {'build': 'yarn install --frozen-lockfile'})
-call dein#add('neoclide/coc-tslint-plugin', {'build': 'yarn install --frozen-lockfile'})
-call dein#add('neoclide/coc-json', {'build': 'yarn install --frozen-lockfile'})
-call dein#add('iamcco/coc-angular', {'build': 'yarn install --frozen-lockfile'})
+" call dein#add('neoclide/coc-tsserver', {'build': 'yarn install --frozen-lockfile'})
+" call dein#add('neoclide/coc-tslint-plugin', {'build': 'yarn install --frozen-lockfile'})
+" call dein#add('neoclide/coc-json', {'build': 'yarn install --frozen-lockfile'})
+" call dein#add('iamcco/coc-angular', {'build': 'yarn install --frozen-lockfile'})
+" call dein#add('iamcco/coc-python', {'build': 'yarn install --frozen-lockfile'})
 
 call dein#end()
 call dein#save_state()
@@ -43,10 +45,11 @@ endif
 
 let mapleader=" "
 
+let g:elm_setup_keybindings=0
 let g:UltiSnipsEditSplit="tabdo"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
 
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|ocko-gps|coverage)|(\.(swp|ico|git|svn))|(flex/.*\.(map|js))$'
 
 let g:ctrlsf_auto_focus = {
     \ "at": "start"
@@ -72,12 +75,14 @@ let g:lightline = {
 
 let g:vista_default_executive = 'coc'
 
-nnoremap <silent> <leader>a :Goyo<CR>
+nnoremap <silent> <leader>a :Goyo<cr>
+
+nnoremap <silent> <leader>gd :Goyo<cr>
 
 " config
-nnoremap <silent> <leader>ec :tabedit ~/.config/nvim/init.vim<CR>
-nnoremap <silent> <leader>lc :so ~/.config/nvim/init.vim<CR>
-nnoremap <silent> <leader>di :call dein#install()<CR>
+nnoremap <silent> <leader>ec :tabedit ~/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>lc :so ~/.config/nvim/init.vim<cr>
+nnoremap <silent> <leader>di :call dein#install()<cr>
 
 " misc
 nnoremap <f1> <nop>
@@ -86,27 +91,31 @@ nnoremap ; :
 vnoremap ; :
 nnoremap : <nop>
 vnoremap : <nop>
-nnoremap <silent> <leader>w :w!<CR>
+nnoremap <silent> <leader>w :w!<cr>
 nnoremap <leader>q <c-w>q
-nnoremap <silent> <leader>ll :nohlsearch<CR>
+nnoremap <silent> <leader>ll :nohlsearch<cr>
 nnoremap < <<
 nnoremap > >>
 "
 " shift and keep selection
 vnoremap < <gv
 vnoremap > >gv
-"
+
 " move lines
 nnoremap <silent> <leader>j :m .+1<cr>
 nnoremap <silent> <leader>k :m .-2<cr>
 vnoremap <silent> <leader>j :m '>+1<cr>gv=gv
 vnoremap <silent> <leader>k :m '<-2<cr>gv=gv
 
-vnoremap <silent> <C-a> :call Incr()<CR>
+" move arguments
+nnoremap <silent> <leader>ah :SidewaysLeft<cr>
+nnoremap <silent> <leader>al :SidewaysRight<cr>
+
+vnoremap <silent> <C-a> :call Incr()<cr>
 inoremap jk <esc>
 
 " used with projectionist to send tests to tmux
-nnoremap <silent> <leader>s :Dispatch!<CR><CR>
+nnoremap <silent> <leader>s :Dispatch!<cr><cr>
 
 " window movement
 nnoremap <C-j> <C-W>j
@@ -122,10 +131,10 @@ nnoremap <silent> <leader>,W :sp<cr><c-w>k
 
 " resize windows
 let dw = 15
-nnoremap <silent> <leader>,r :exe "vertical resize " . (winwidth(0) - dw)<CR>
-nnoremap <silent> <leader>.r :exe "vertical resize " . (winwidth(0) + dw)<CR>
-nnoremap <silent> <leader>,R :exe "resize " . (winheight(0) - dw)<CR>
-nnoremap <silent> <leader>.R :exe "resize " . (winheight(0) + dw)<CR>
+nnoremap <silent> <leader>,r :exe "vertical resize " . (winwidth(0) - dw)<cr>
+nnoremap <silent> <leader>.r :exe "vertical resize " . (winwidth(0) + dw)<cr>
+nnoremap <silent> <leader>,R :exe "resize " . (winheight(0) - dw)<cr>
+nnoremap <silent> <leader>.R :exe "resize " . (winheight(0) + dw)<cr>
 nnoremap <leader><leader> <c-w>=
 
 " better movement
@@ -152,23 +161,27 @@ nnoremap <leader>p "+p
 nnoremap <leader>y "+y
 vnoremap <leader>p "+p
 vnoremap <leader>y "+y
-nnoremap <leader>o :CtrlP<CR>
+nnoremap <leader>o :CtrlP<cr>
 
 " find and replace
-nnoremap <silent> <leader>f :call VisualFindAndReplace()<CR>
-xnoremap <silent> <leader>f :call VisualFindAndReplaceWithSelection()<CR>
+nnoremap <silent> <leader>f :call VisualFindAndReplace()<cr>
+xnoremap <silent> <leader>f :call VisualFindAndReplaceWithSelection()<cr>
 
 " change word under the cursor
 nnoremap <leader>c *``cgn
 
-" definition
-nmap gd <Plug>(coc-definition)
+" coc bindings
+nnoremap <silent> gd :call CocActionAsync('jumpDefinition')<cr>
 nmap <leader>i <Plug>(coc-fix-current)
 nmap <leader>r <Plug>(coc-references)
+nmap <leader>n <Plug>(coc-rename)
+nmap <leader>, <Plug>(coc-refactor)
+vmap <leader>= <Plug>(coc-format-selected)
+nnoremap <leader>= :call CocAction('format')<cr>
 
 " open terminal
-nnoremap <silent> <leader>' :sp<CR><C-w>J:res 10<cr>:ProjectDo terminal<CR>i
-nnoremap <silent> <leader>" :sp<CR><C-w>J:res 10<cr>:terminal<CR>i
+nnoremap <silent> <leader>' :sp<cr><C-w>J:res 10<cr>:ProjectDo terminal<cr>i
+nnoremap <silent> <leader>" :sp<cr><C-w>J:res 10<cr>:terminal<cr>i
 
 " kill terminal without prompting exit status
 au TermClose * exe 'bd!'
@@ -186,10 +199,10 @@ autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " projectionist jump to alternate file
-nnoremap <silent> <leader>gt :Etest<CR>
-nnoremap <silent> <leader>gh :Ehtml<CR>
-nnoremap <silent> <leader>gs :Esource<CR>
-nnoremap <silent> <leader>gc :Ecss<CR>
+nnoremap <silent> <leader>gt :Etest<cr>
+nnoremap <silent> <leader>gh :Ehtml<cr>
+nnoremap <silent> <leader>gs :Esource<cr>
+nnoremap <silent> <leader>gc :Ecss<cr>
 
 nnoremap <leader>ag :CtrlSF ''<left>
 vmap <leader>ag <Plug>CtrlSFVwordExec
@@ -198,16 +211,16 @@ vmap <leader>ag <Plug>CtrlSFVwordExec
 tnoremap <esc> <C-\><C-n>
 
 " open defx file manager
-nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=35 -direction=topleft<CR>
+nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=35 -direction=topleft<cr>
 
 " defx keybindings
 autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
 
     " open file {
-    nnoremap <silent><buffer><expr> <CR>
+    nnoremap <silent><buffer><expr> <cr>
     \ defx#is_directory() ?
-      \ defx#do_action("open_directory") : 
+      \ defx#do_action("open_directory") :
       \ defx#do_action('open', 'tabnew')
 
     nnoremap <silent><buffer><expr> L
@@ -269,9 +282,6 @@ autocmd FileType defx call s:defx_my_settings()
 	  nnoremap <silent><buffer><expr> yy
 	  \ defx#do_action('yank_path')
 
-	  nnoremap <silent><buffer><expr> .
-	  \ defx#do_action('repeat')
-
 	  nnoremap <silent><buffer><expr> h
 	  \ defx#do_action('cd', ['..'])
 
@@ -315,11 +325,12 @@ set mousehide
 set cursorline
 set scrolloff=3
 set list
-set listchars=tab:›\ ,trail:•,extends:#,nbsp:. 
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 set splitright
 set splitbelow
 set termguicolors
 set noshowmode
+set updatetime=300
 colors gruvbox
 filetype plugin indent on
 syntax on
@@ -413,3 +424,6 @@ function! s:goyo_leave()
   set tabline=%!MyTabLine()
   call HighlightTabLine()
 endfunction
+
+" remove trailing witespace at write
+autocmd BufWritePre * %s/\s\+$//e
