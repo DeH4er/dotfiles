@@ -4,30 +4,31 @@ set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 if dein#load_state('~/.cache/dein')
 
+call dein#disable('tpope/vim-dispatch')
+call dein#disable('tpope/vim-surround')
+call dein#disable('tpope/vim-fugitive')
+call dein#disable('junegunn/goyo.vim')
+call dein#disable('liuchengxu/vista.vim')
+call dein#disable('junegunn/limelight.vim')
+call dein#disable('reedes/vim-pencil')
+call dein#disable('AndrewRadev/sideways.vim')
+call dein#disable('ElmCast/elm-vim')
+
 call dein#begin('~/.cache/dein')
 call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-call dein#add('kien/ctrlp.vim')
 call dein#add('mhinz/vim-startify')
+call dein#add('kien/ctrlp.vim')
 call dein#add('easymotion/vim-easymotion')
-call dein#add('tpope/vim-dispatch')
 call dein#add('wellle/targets.vim')
 call dein#add('gruvbox-community/gruvbox')
 call dein#add('osyo-manga/vim-over')
 call dein#add('tpope/vim-projectionist')
 call dein#add('Shougo/defx.nvim')
 call dein#add('SirVer/ultisnips')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-repeat')
-call dein#add('junegunn/goyo.vim')
 call dein#add('itchyny/lightline.vim')
 call dein#add('dyng/ctrlsf.vim')
-call dein#add('liuchengxu/vista.vim')
-call dein#add('junegunn/limelight.vim')
-call dein#add('reedes/vim-pencil')
-call dein#add('AndrewRadev/sideways.vim')
-call dein#add('ElmCast/elm-vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -59,9 +60,9 @@ let g:ctrlsf_default_root = 'project'
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_smartcase = 1
 
-let g:goyo_width = 120
-let g:goyo_height = '100%'
-
+" let g:goyo_width = 120
+" let g:goyo_height = '100%'
+"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -72,12 +73,12 @@ let g:lightline = {
       \     'gitbranch': 'fugitive#head'
       \   },
       \ }
+"
+" let g:vista_default_executive = 'coc'
 
-let g:vista_default_executive = 'coc'
+" nnoremap <silent> <leader>a :Goyo<cr>
 
-nnoremap <silent> <leader>a :Goyo<cr>
-
-nnoremap <silent> <leader>gd :Goyo<cr>
+" nnoremap <silent> <leader>gd :Goyo<cr>
 
 " config
 nnoremap <silent> <leader>ec :tabedit ~/.config/nvim/init.vim<cr>
@@ -108,14 +109,14 @@ vnoremap <silent> <leader>j :m '>+1<cr>gv=gv
 vnoremap <silent> <leader>k :m '<-2<cr>gv=gv
 
 " move arguments
-nnoremap <silent> <leader>ah :SidewaysLeft<cr>
-nnoremap <silent> <leader>al :SidewaysRight<cr>
+" nnoremap <silent> <leader>ah :SidewaysLeft<cr>
+" nnoremap <silent> <leader>al :SidewaysRight<cr>
 
 vnoremap <silent> <C-a> :call Incr()<cr>
 inoremap jk <esc>
 
 " used with projectionist to send tests to tmux
-nnoremap <silent> <leader>s :Dispatch!<cr><cr>
+" nnoremap <silent> <leader>s :Dispatch!<cr><cr>
 
 " window movement
 nnoremap <C-j> <C-W>j
@@ -195,8 +196,11 @@ au FileType python setlocal
     \ expandtab
     \ fileformat=unix
 
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
+au UIEnter * call HighlightTabLine()
+au UIEnter * set tabline=%!MyTabLine()
+
+" autocmd! User GoyoEnter nested call <SID>goyo_enter()
+" autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " projectionist jump to alternate file
 nnoremap <silent> <leader>gt :Etest<cr>
@@ -215,88 +219,88 @@ nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=35 -dire
 
 " defx keybindings
 autocmd FileType defx call s:defx_my_settings()
-	function! s:defx_my_settings() abort
+function! s:defx_my_settings() abort
 
-    " open file {
-    nnoremap <silent><buffer><expr> <cr>
-    \ defx#is_directory() ?
-      \ defx#do_action("open_directory") :
-      \ defx#do_action('open', 'tabnew')
+  " open file {
+  nnoremap <silent><buffer><expr> <cr>
+        \ defx#is_directory() ?
+        \ defx#do_action("open_directory") :
+        \ defx#do_action('open', 'tabnew')
 
-    nnoremap <silent><buffer><expr> L
-    \ defx#is_directory() ?
-      \ defx#do_action('open_or_close_tree') :
-      \ defx#do_action('drop')
+  nnoremap <silent><buffer><expr> L
+        \ defx#is_directory() ?
+        \ defx#do_action('open_or_close_tree') :
+        \ defx#do_action('drop')
 
-    nnoremap <silent><buffer><expr> l
-    \ defx#is_directory() ?
-      \ defx#do_action('open_or_close_tree') :
-      \ defx#do_action('open', 'vsplit')
+  nnoremap <silent><buffer><expr> l
+        \ defx#is_directory() ?
+        \ defx#do_action('open_or_close_tree') :
+        \ defx#do_action('open', 'vsplit')
 
-	  nnoremap <silent><buffer><expr> y
-	  \ defx#do_action('copy')
+  nnoremap <silent><buffer><expr> y
+        \ defx#do_action('copy')
 
-	  nnoremap <silent><buffer><expr> m
-	  \ defx#do_action('move')
+  nnoremap <silent><buffer><expr> m
+        \ defx#do_action('move')
 
-	  nnoremap <silent><buffer><expr> p
-	  \ defx#do_action('paste')
+  nnoremap <silent><buffer><expr> p
+        \ defx#do_action('paste')
 
-	  nnoremap <silent><buffer><expr> d
-	  \ defx#do_action('remove')
+  nnoremap <silent><buffer><expr> d
+        \ defx#do_action('remove')
 
-	  nnoremap <silent><buffer><expr> r
-	  \ defx#do_action('rename')
+  nnoremap <silent><buffer><expr> r
+        \ defx#do_action('rename')
 
-	  nnoremap <silent><buffer><expr> K
-	  \ defx#do_action('new_directory')
+  nnoremap <silent><buffer><expr> K
+        \ defx#do_action('new_directory')
 
-	  nnoremap <silent><buffer><expr> N
-	  \ defx#do_action('new_file')
+  nnoremap <silent><buffer><expr> N
+        \ defx#do_action('new_file')
 
-	  nnoremap <silent><buffer><expr> M
-	  \ defx#do_action('new_multiple_files')
+  nnoremap <silent><buffer><expr> M
+        \ defx#do_action('new_multiple_files')
 
-	  nnoremap <silent><buffer><expr> C
-	  \ defx#do_action('toggle_columns',
-	  \                'mark:indent:icon:filename:type:size:time')
+  nnoremap <silent><buffer><expr> C
+        \ defx#do_action('toggle_columns',
+        \                'mark:indent:icon:filename:type:size:time')
 
-	  nnoremap <silent><buffer><expr> S
-	  \ defx#do_action('toggle_sort', 'time')
+  nnoremap <silent><buffer><expr> S
+        \ defx#do_action('toggle_sort', 'time')
 
-	  nnoremap <silent><buffer><expr> .
-	  \ defx#do_action('toggle_ignored_files')
+  nnoremap <silent><buffer><expr> .
+        \ defx#do_action('toggle_ignored_files')
 
-	  nnoremap <silent><buffer><expr> s
-	  \ defx#do_action('toggle_select')
+  nnoremap <silent><buffer><expr> s
+        \ defx#do_action('toggle_select')
 
-	  nnoremap <silent><buffer><expr> *
-	  \ defx#do_action('toggle_select_all')
+  nnoremap <silent><buffer><expr> *
+        \ defx#do_action('toggle_select_all')
 
-	  nnoremap <silent><buffer><expr> ;
-	  \ defx#do_action('execute_command')
+  nnoremap <silent><buffer><expr> ;
+        \ defx#do_action('execute_command')
 
-	  nnoremap <silent><buffer><expr> x
-	  \ defx#do_action('execute_system')
+  nnoremap <silent><buffer><expr> x
+        \ defx#do_action('execute_system')
 
-	  nnoremap <silent><buffer><expr> yy
-	  \ defx#do_action('yank_path')
+  nnoremap <silent><buffer><expr> yy
+        \ defx#do_action('yank_path')
 
-	  nnoremap <silent><buffer><expr> h
-	  \ defx#do_action('cd', ['..'])
+  nnoremap <silent><buffer><expr> h
+        \ defx#do_action('cd', ['..'])
 
-	  nnoremap <silent><buffer><expr> q
-	  \ defx#do_action('quit')
+  nnoremap <silent><buffer><expr> q
+        \ defx#do_action('quit')
 
-	  nnoremap <silent><buffer><expr> <C-l>
-	  \ defx#do_action('redraw')
+  nnoremap <silent><buffer><expr> <C-l>
+        \ defx#do_action('redraw')
 
-	  nnoremap <silent><buffer><expr> <C-g>
-	  \ defx#do_action('print')
+  nnoremap <silent><buffer><expr> <C-g>
+        \ defx#do_action('print')
 
-	  nnoremap <silent><buffer><expr> cd
-	  \ defx#do_action('change_vim_cwd')
-	endfunction
+  nnoremap <silent><buffer><expr> cd
+        \ defx#do_action('change_vim_cwd')
+endfunction
 
 call defx#custom#option('_', {
       \ 'root_marker': 'rm -rf ',
@@ -331,6 +335,7 @@ set splitbelow
 set termguicolors
 set noshowmode
 set updatetime=300
+set showtabline=1
 colors gruvbox
 filetype plugin indent on
 syntax on
@@ -411,19 +416,17 @@ function! MyTabLabel(n)
   return label
 endfunction
 
-set tabline=%!MyTabLine()
-call HighlightTabLine()
 
-function! s:goyo_enter()
-  exe "norm! :Limelight\<cr>"
-endfunction
-
-function! s:goyo_leave()
-  exe "norm! :Limelight!\<cr>"
-  set showtabline=1
-  set tabline=%!MyTabLine()
-  call HighlightTabLine()
-endfunction
+" function! s:goyo_enter()
+"   exe "norm! :Limelight\<cr>"
+" endfunction
+"
+" function! s:goyo_leave()
+"   exe "norm! :Limelight!\<cr>"
+"   set showtabline=1
+"   call HighlightTabLine()
+"   set tabline=%!MyTabLine()
+" endfunction
 
 " remove trailing witespace at write
 autocmd BufWritePre * %s/\s\+$//e

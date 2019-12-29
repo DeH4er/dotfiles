@@ -46,8 +46,12 @@ eval "$(pyenv virtualenv-init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^P" up-line-or-beginning-search # Up
+bindkey "^N" down-line-or-beginning-search # Down
 
 #alias fan="cd ~/projects/flex/PC && nvm use 10.16.0 && npm run serve:angular"
 #alias fc="cd ~/projects/flex/PC && nvm use 10.16.0 && tsc -w -p tsconfig-serve.json"

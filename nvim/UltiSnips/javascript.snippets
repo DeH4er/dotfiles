@@ -1,0 +1,58 @@
+global !p
+def insert_functions(inp):
+	res = ''
+	for fn_name in inp.split(',\n'):
+		formatted_fn = fn_name.strip()
+		if formatted_fn:
+			res += '  function ' + formatted_fn + '() {\n  }\n\n'
+	return res.rstrip()
+endglobal
+
+snippet edf ""
+export default function $1() {
+  $2
+}
+endsnippet
+
+snippet rof ""
+return Object.freeze({
+  $1
+})
+$2
+endsnippet
+
+snippet f ""
+function $1($2) {
+	$3
+}
+endsnippet
+
+snippet ff ""
+export default function $1() {
+  return Object.freeze({
+    $2
+  })
+
+${3}`!p snip.rv = insert_functions(t[2])`
+}
+endsnippet
+
+snippet des ""
+describe('$1', () => {
+  it('$2', () => {
+    $3
+  })
+})
+endsnippet
+
+snippet it ""
+it('$1', () => {
+  $2
+})
+endsnippet
+
+snippet ar ""
+($1) => \{
+  $2
+\}
+endsnippet
