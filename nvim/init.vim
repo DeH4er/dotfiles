@@ -88,6 +88,8 @@ nnoremap <silent> <leader>di :call dein#install()<cr>
 " misc
 nnoremap <f1> <nop>
 inoremap <bs> <nop>
+inoremap <c-space> <nop>
+inoremap <c-k> <C-O>O
 nnoremap ; :
 vnoremap ; :
 nnoremap : <nop>
@@ -187,14 +189,14 @@ nnoremap <silent> <leader>" :sp<cr><C-w>J:res 10<cr>:terminal<cr>i
 " kill terminal without prompting exit status
 au TermClose * exe 'bd!'
 
-au FileType c,cpp setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
-au FileType python setlocal
-    \ tabstop=4
-    \ softtabstop=4
-    \ shiftwidth=4
-    \ textwidth=79
-    \ expandtab
-    \ fileformat=unix
+" au FileType c,cpp setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
+" au FileType python setlocal
+"     \ tabstop=4
+"     \ softtabstop=4
+"     \ shiftwidth=4
+"     \ textwidth=79
+"     \ expandtab
+"     \ fileformat=unix
 
 au UIEnter * call HighlightTabLine()
 au UIEnter * set tabline=%!MyTabLine()
@@ -430,3 +432,5 @@ endfunction
 
 " remove trailing witespace at write
 autocmd BufWritePre * %s/\s\+$//e
+call HighlightTabLine()
+set tabline=%!MyTabLine()

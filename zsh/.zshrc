@@ -33,8 +33,8 @@ alias pd="pyenv deactivate"
 
 alias v=nvim
 export EDITOR=nvim
-export PATH="$HOME/.pyenv/bin:$PATH"
-export PATH="$HOME/npm/bin:$PATH"
+# export PATH="$HOME/.pyenv/bin:$PATH"
+# export PATH="$HOME/npm/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export NODE_PATH="$HOME/npm/lib/node_modules:$NODE_PATH"
 
