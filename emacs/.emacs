@@ -1,6 +1,6 @@
 ;; packages
-(package-initialize)
 (require 'package)
+(package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
 
@@ -14,7 +14,7 @@
     ("1436d643b98844555d56c59c74004eb158dc85fc55d2e7205f8d9b8c860e177f" default)))
  '(package-selected-packages
    (quote
-    (lsp-mode gruvbox-theme projectile evil))))
+    (typescript-mode company-lsp company lsp-mode gruvbox-theme projectile evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -95,7 +95,19 @@
 
 
 ;; set up lsp server
+(require 'lsp-ui)
 (add-hook 'typescript-mode-hook #'lsp)
 (add-hook 'python-mode-hook #'lsp)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode)
+(add-hook 'typescript-mode-hook 'flycheck-mode)
 
 ;; set up projectile
+(require 'projectile)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
+
+;; completion
+(add-hook 'after-init-hook 'global-company-mode)
+(require 'company-lsp)
+(push 'company-lsp company-backends)
