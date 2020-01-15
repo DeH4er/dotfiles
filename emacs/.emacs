@@ -14,7 +14,7 @@
     ("1436d643b98844555d56c59c74004eb158dc85fc55d2e7205f8d9b8c860e177f" default)))
  '(package-selected-packages
    (quote
-    (typescript-mode company-lsp company lsp-mode gruvbox-theme projectile evil))))
+    (ripgrep typescript-mode company-lsp company lsp-mode gruvbox-theme projectile evil))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -57,13 +57,12 @@
 ;; evil bindings
 (evil-set-leader 'normal (kbd "SPC"))
 
-(evil-global-set-key 'normal (kbd "<leader>x") 'execute-extended-command)
+(evil-global-set-key 'normal (kbd "<leader>x") 'helm-M-x)
 
 (evil-global-set-key 'normal (kbd "<leader>w") 'save-buffer-force)
 (evil-global-set-key 'normal (kbd "<leader>q") 'delete-window)
 ; (evil-global-set-key 'insert (kbd "j k") 'evil-normal-state)
 (evil-global-set-key 'normal (kbd "C-u") 'evil-scroll-up)
-(evil-global-set-key 'insert (kbd "C-h") 'backward-delete-char-untabify)
 (evil-global-set-key 'insert (kbd "C-h") 'backward-delete-char-untabify)
 
 (evil-global-set-key 'normal (kbd ",") 'evil-search-forward)
@@ -91,6 +90,7 @@
 ;; fuzzy search
 ;; in files
 ;; for files
+(require 'ripgrep)
 
 
 
@@ -103,7 +103,7 @@
 
 ;; set up projectile
 (require 'projectile)
-(projectile-mode +1)
+(projectile-mode 1)
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 
@@ -111,3 +111,9 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (require 'company-lsp)
 (push 'company-lsp company-backends)
+
+;; helm
+(require 'helm-config)
+(setq helm-M-x-fuzzy-match t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(helm-mode 1)
