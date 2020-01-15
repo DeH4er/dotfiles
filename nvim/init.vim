@@ -62,7 +62,6 @@ let g:EasyMotion_smartcase = 1
 
 " let g:goyo_width = 120
 " let g:goyo_height = '100%'
-"
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
@@ -76,8 +75,9 @@ let g:lightline = {
 "
 " let g:vista_default_executive = 'coc'
 
-" nnoremap <silent> <leader>a :Goyo<cr>
+" let g:vista_default_executive = 'coc'
 
+" nnoremap <silent> <leader>a :Goyo<cr>
 " nnoremap <silent> <leader>gd :Goyo<cr>
 
 " config
@@ -89,7 +89,9 @@ nnoremap <silent> <leader>di :call dein#install()<cr>
 nnoremap <f1> <nop>
 inoremap <bs> <nop>
 inoremap <c-space> <nop>
-inoremap <c-k> <C-O>O
+inoremap <c-k> <c-o>O
+inoremap <c-j> <c-o>o
+"nnoremap <leader>f. /\(this\)\@<!\.\w*\.<cr>
 nnoremap ; :
 vnoremap ; :
 nnoremap : <nop>
@@ -110,6 +112,7 @@ nnoremap <silent> <leader>k :m .-2<cr>
 vnoremap <silent> <leader>j :m '>+1<cr>gv=gv
 vnoremap <silent> <leader>k :m '<-2<cr>gv=gv
 
+nnoremap <silent> <leader>a :CocList commands<cr>
 " move arguments
 " nnoremap <silent> <leader>ah :SidewaysLeft<cr>
 " nnoremap <silent> <leader>al :SidewaysRight<cr>
@@ -198,9 +201,6 @@ au TermClose * exe 'bd!'
 "     \ expandtab
 "     \ fileformat=unix
 
-au UIEnter * call HighlightTabLine()
-au UIEnter * set tabline=%!MyTabLine()
-
 " autocmd! User GoyoEnter nested call <SID>goyo_enter()
 " autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
@@ -223,7 +223,7 @@ nnoremap <silent> <leader><tab> :Defx -split=vertical -toggle -winwidth=35 -dire
 autocmd FileType defx call s:defx_my_settings()
 function! s:defx_my_settings() abort
 
-  " open file {
+" open file {
   nnoremap <silent><buffer><expr> <cr>
         \ defx#is_directory() ?
         \ defx#do_action("open_directory") :
@@ -240,68 +240,68 @@ function! s:defx_my_settings() abort
         \ defx#do_action('open', 'vsplit')
 
   nnoremap <silent><buffer><expr> y
-        \ defx#do_action('copy')
+  \ defx#do_action('copy')
 
   nnoremap <silent><buffer><expr> m
-        \ defx#do_action('move')
+  \ defx#do_action('move')
 
   nnoremap <silent><buffer><expr> p
-        \ defx#do_action('paste')
+  \ defx#do_action('paste')
 
   nnoremap <silent><buffer><expr> d
-        \ defx#do_action('remove')
+  \ defx#do_action('remove')
 
   nnoremap <silent><buffer><expr> r
-        \ defx#do_action('rename')
+  \ defx#do_action('rename')
 
   nnoremap <silent><buffer><expr> K
-        \ defx#do_action('new_directory')
+  \ defx#do_action('new_directory')
 
   nnoremap <silent><buffer><expr> N
-        \ defx#do_action('new_file')
+  \ defx#do_action('new_file')
 
   nnoremap <silent><buffer><expr> M
-        \ defx#do_action('new_multiple_files')
+  \ defx#do_action('new_multiple_files')
 
   nnoremap <silent><buffer><expr> C
-        \ defx#do_action('toggle_columns',
-        \                'mark:indent:icon:filename:type:size:time')
+  \ defx#do_action('toggle_columns',
+  \                'mark:indent:icon:filename:type:size:time')
 
   nnoremap <silent><buffer><expr> S
-        \ defx#do_action('toggle_sort', 'time')
+  \ defx#do_action('toggle_sort', 'time')
 
   nnoremap <silent><buffer><expr> .
-        \ defx#do_action('toggle_ignored_files')
+  \ defx#do_action('toggle_ignored_files')
 
   nnoremap <silent><buffer><expr> s
-        \ defx#do_action('toggle_select')
+  \ defx#do_action('toggle_select')
 
   nnoremap <silent><buffer><expr> *
-        \ defx#do_action('toggle_select_all')
+  \ defx#do_action('toggle_select_all')
 
   nnoremap <silent><buffer><expr> ;
-        \ defx#do_action('execute_command')
+  \ defx#do_action('execute_command')
 
   nnoremap <silent><buffer><expr> x
-        \ defx#do_action('execute_system')
+  \ defx#do_action('execute_system')
 
   nnoremap <silent><buffer><expr> yy
-        \ defx#do_action('yank_path')
+  \ defx#do_action('yank_path')
 
   nnoremap <silent><buffer><expr> h
-        \ defx#do_action('cd', ['..'])
+  \ defx#do_action('cd', ['..'])
 
   nnoremap <silent><buffer><expr> q
-        \ defx#do_action('quit')
+  \ defx#do_action('quit')
 
   nnoremap <silent><buffer><expr> <C-l>
-        \ defx#do_action('redraw')
+  \ defx#do_action('redraw')
 
   nnoremap <silent><buffer><expr> <C-g>
-        \ defx#do_action('print')
+  \ defx#do_action('print')
 
   nnoremap <silent><buffer><expr> cd
-        \ defx#do_action('change_vim_cwd')
+  \ defx#do_action('change_vim_cwd')
 endfunction
 
 call defx#custom#option('_', {
@@ -418,17 +418,19 @@ function! MyTabLabel(n)
   return label
 endfunction
 
-
-" function! s:goyo_enter()
-"   exe "norm! :Limelight\<cr>"
-" endfunction
+"function! s:goyo_enter()
+"  exe "norm! :Limelight\<cr>"
+"endfunction
 "
-" function! s:goyo_leave()
-"   exe "norm! :Limelight!\<cr>"
-"   set showtabline=1
-"   call HighlightTabLine()
-"   set tabline=%!MyTabLine()
-" endfunction
+"function! s:goyo_leave()
+"  exe "norm! :Limelight!\<cr>"
+"  set showtabline=1
+"  set tabline=%!MyTabLine()
+"  call HighlightTabLine()
+"endfunction
+
+au UIEnter * call HighlightTabLine()
+au UIEnter * set tabline=%!MyTabLine()
 
 " remove trailing witespace at write
 autocmd BufWritePre * %s/\s\+$//e

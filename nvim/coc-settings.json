@@ -1,5 +1,6 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["elm"],
+  "python.jediEnabled": false,
   "languageserver": {
     "elmLS": {
       "command": "elm-language-server",
@@ -13,13 +14,15 @@
         "elmAnalyseTrigger": "change"
       }
     },
-
     "haskell": {
       "command": "hie-wrapper",
       "args": ["--lsp"],
       "rootPatterns": [
         "stack.yaml",
         "cabal.config",
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
         "package.yaml"
       ],
       "filetypes": [
