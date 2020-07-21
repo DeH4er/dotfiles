@@ -1,5 +1,6 @@
 #!/bin/sh
 sudo pacman -S neovim
+npm i -g yarn
 
 mkdir -p $HOME/.config/nvim
 ln -s -f $DOTFILE_PWD/nvim/init.vim $HOME/.config/nvim/init.vim
