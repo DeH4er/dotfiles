@@ -33,12 +33,8 @@ alias pd="pyenv deactivate"
 
 alias v=nvim
 export EDITOR=nvim
-# export PATH="$HOME/.pyenv/bin:$PATH"
-# export PATH="$HOME/npm/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export NODE_PATH="$HOME/npm/lib/node_modules:$NODE_PATH"
-
-alias tmux="tmux -2"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -53,15 +49,10 @@ zle -N down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search # Up
 bindkey "^N" down-line-or-beginning-search # Down
 
-#alias fan="cd ~/projects/flex/PC && nvm use 10.16.0 && npm run serve:angular"
-#alias fc="cd ~/projects/flex/PC && nvm use 10.16.0 && tsc -w -p tsconfig-serve.json"
-#alias fs="cd ~/projects/flex/PC && nvm use 10.16.0 && pa flex && nodemon flex/*.js --exec 'electron . --serve'"
+alias t=tig
 
-#alias can="cd ~/projects/ctep/PC && nvm use 10.16.0 && npm run serve:angular"
-#alias cc="cd ~/projects/ctep/PC && nvm use 10.16.0 && tsc -w -p tsconfig-serve.json"
-#alias cs="cd ~/projects/ctep/PC && nvm use 10.16.0 && pa ctep && nodemon ct_ep/*.js --exec 'electron . --serve'"
-#
-#alias upb="node ~/.scripts/inc-build-v.js && git add package.json electron-builder.json && git commit -m 'up build version'"
-
-[[ -s /home/rmrf/.autojump/etc/profile.d/autojump.sh ]] && source /home/rmrf/.autojump/etc/profile.d/autojump.sh
+[[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+source $HOME/.local_zshrc

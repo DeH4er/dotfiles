@@ -1,6 +1,10 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["elm"],
-  "python.jediEnabled": false,
+  "python.linting.pep8Enabled": true,
+  "python.linting.pep8Args": ["--max-line-length=120", "--ignore=E701"],
+  "python.linting.mypyEnabled": true,
+  "python.formatting.provider": "yapf",
+  "codeLens.enable": true,
   "languageserver": {
     "elmLS": {
       "command": "elm-language-server",

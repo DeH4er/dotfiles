@@ -6,13 +6,12 @@ if dein#load_state('~/.cache/dein')
 
 call dein#disable('tpope/vim-dispatch')
 call dein#disable('tpope/vim-surround')
-call dein#disable('tpope/vim-fugitive')
 call dein#disable('junegunn/goyo.vim')
 call dein#disable('liuchengxu/vista.vim')
 call dein#disable('junegunn/limelight.vim')
 call dein#disable('reedes/vim-pencil')
 call dein#disable('AndrewRadev/sideways.vim')
-call dein#disable('ElmCast/elm-vim')
+call dein#disable('prendradjaja/vim-vertigo')
 
 call dein#begin('~/.cache/dein')
 call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
@@ -29,6 +28,9 @@ call dein#add('SirVer/ultisnips')
 call dein#add('tpope/vim-repeat')
 call dein#add('itchyny/lightline.vim')
 call dein#add('dyng/ctrlsf.vim')
+call dein#add('tpope/vim-fugitive')
+call dein#add('purescript-contrib/purescript-vim')
+call dein#add('ElmCast/elm-vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -101,6 +103,10 @@ nnoremap <leader>q <c-w>q
 nnoremap <silent> <leader>ll :nohlsearch<cr>
 nnoremap < <<
 nnoremap > >>
+
+nnoremap : g;
+nnoremap Q g,
+
 "
 " shift and keep selection
 vnoremap < <gv
@@ -112,13 +118,15 @@ nnoremap <silent> <leader>k :m .-2<cr>
 vnoremap <silent> <leader>j :m '>+1<cr>gv=gv
 vnoremap <silent> <leader>k :m '<-2<cr>gv=gv
 
-nnoremap <silent> <leader>a :CocList commands<cr>
+nnoremap <silent> <leader>u :CocList commands<cr>
+vnoremap <silent> <leader>u :CocList commands<cr>
 " move arguments
 " nnoremap <silent> <leader>ah :SidewaysLeft<cr>
 " nnoremap <silent> <leader>al :SidewaysRight<cr>
 
 vnoremap <silent> <C-a> :call Incr()<cr>
 inoremap jk <esc>
+tnoremap jk <C-\><C-n>
 
 " used with projectionist to send tests to tmux
 " nnoremap <silent> <leader>s :Dispatch!<cr><cr>
@@ -175,6 +183,8 @@ xnoremap <silent> <leader>f :call VisualFindAndReplaceWithSelection()<cr>
 
 " change word under the cursor
 nnoremap <leader>c *``cgn
+vnoremap <leader>c y/\V<C-R>=escape(@",'/\')<CR><CR>``cgn
+vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " coc bindings
 nnoremap <silent> gd :call CocActionAsync('jumpDefinition')<cr>
@@ -192,14 +202,14 @@ nnoremap <silent> <leader>" :sp<cr><C-w>J:res 10<cr>:terminal<cr>i
 " kill terminal without prompting exit status
 au TermClose * exe 'bd!'
 
-" au FileType c,cpp setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
-" au FileType python setlocal
-"     \ tabstop=4
-"     \ softtabstop=4
-"     \ shiftwidth=4
-"     \ textwidth=79
-"     \ expandtab
-"     \ fileformat=unix
+au FileType c,cpp setlocal noexpandtab tabstop=8 shiftwidth=8 nolist
+au FileType python setlocal
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    " \ textwidth=79
+    \ expandtab
+    \ fileformat=unix
 
 " autocmd! User GoyoEnter nested call <SID>goyo_enter()
 " autocmd! User GoyoLeave nested call <SID>goyo_leave()
