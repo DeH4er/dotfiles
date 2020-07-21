@@ -50,4 +50,5 @@ cd $DOTFILE_PWD
 ./dmenu/install.sh
 ./kitty/install.sh
 ./slstatus/install.sh
-# TODO: add git config and installation
+
+cat README
