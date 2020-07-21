@@ -1,9 +1,9 @@
 #!/bin/sh
 export DOTFILE_PWD=$(pwd)
 
-# --- installation
+sudo pacman -S xclip ripgrep docker tig
 
-sudo pacman -S git xclip ripgrep docker tig
+./git/install.sh
 
 # --- structure
 mkdir -p $HOME/source
@@ -38,23 +38,10 @@ curl https://pyenv.run | bash
 
 cd $DOTFILE_PWD
 
-# --- zsh
-chmod +x ./zsh/install.sh
 ./zsh/install.sh
-
-# --- neovim
-chmod +x ./nvim/install.sh
 ./nvim/install.sh
-
-# --- dwm
-chmod +x ./dwm/install.sh
 ./dwm/install.sh
-
-# --- dmenu
-chmod +x ./dmenu/install.sh
 ./dmenu/install.sh
-
-# --- kitty
-chmod +x ./kitty/install.sh
 ./kitty/install.sh
-
+./slstatus/install.sh
+# TODO: add git config and installation
