@@ -2,9 +2,7 @@
 
 Ok, dont forget to:
   1. Run neovim cmd "call dein#install()"
-  2. Open neovim at
-    ~/.cache/dein/repos/github.com/neoclide/coc.nvim folder
-  3. Run neovim cmd "UpdateRemotePlugins"
-  4. Logout
+  2. Run neovim cmd "UpdateRemotePlugins"
+  3. Logout
 
 ********************************************************************************

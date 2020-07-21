@@ -2,7 +2,9 @@
 git push
 
 cd $HOME/source/dmenu
-git push github master
+git push
 
 cd $HOME/source/dwm
-git push github master
+git push
+
+cd $HOME/source/dotfiles
