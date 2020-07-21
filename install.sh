@@ -1,7 +1,7 @@
 #!/bin/sh
 export DOTFILE_PWD=$(pwd)
 
-sudo pacman -S xclip ripgrep docker tig
+sudo pacman -S xclip ripgrep docker tig scrot
 
 ./git/install.sh
 
