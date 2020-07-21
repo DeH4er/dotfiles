@@ -3,7 +3,7 @@ export DOTFILE_PWD=$(pwd)
 
 # --- installation
 
-sudo pacman -S git xclip ripgrep docker
+sudo pacman -S git xclip ripgrep docker tig
 
 # --- structure
 mkdir -p $HOME/source
