@@ -3,26 +3,40 @@ export DOTFILE_PWD=$(pwd)
 
 # --- installation
 
-sudo pacman -S neovim zsh kitty git
+sudo pacman -S git xclip ripgrep docker
+
+# --- structure
+mkdir -p $HOME/source
+mkdir -p $HOME/binary
+mkdir -p $HOME/projects
+
+# --- tools from source
+cd $HOME/source
 
 # yay
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
+cd ..
 
+# autojump
+git clone git://github.com/wting/autojump.git
+cd autojump
+./install.py
+cd ..
+
+# nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+nvm install v12.18.2
+
+# fonts
+sudo pacman -S ttf-hack
 yay -S ttf-jetbrains-mono-git
 
-sudo npm i -g typescript neovim
+# pyenv
+curl https://pyenv.run | bash
 
-# todo: install py2/3 pip
-python2 -m pip install neovim
-python3 -m pip install neovim
-
-# --- structure
-mkdir $HOME/source
-mkdir $HOME/binary
-mkdir $HOME/projects
-# todo: install pyenv
+cd $DOTFILE_PWD
 
 # --- zsh
 chmod +x ./zsh/install.sh
@@ -39,4 +53,8 @@ chmod +x ./dwm/install.sh
 # --- dmenu
 chmod +x ./dmenu/install.sh
 ./dmenu/install.sh
+
+# --- kitty
+chmod +x ./kitty/install.sh
+./kitty/install.sh
 
