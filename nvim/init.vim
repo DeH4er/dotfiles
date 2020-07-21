@@ -34,7 +34,7 @@ call dein#add('ElmCast/elm-vim')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
-call dein#add('neoclide/coc.nvim', {'merge':0, 'build': './install.sh nightly'})
+call dein#add('neoclide/coc.nvim', {'merged':0, 'rev': 'release'})
 " call dein#add('neoclide/coc-tsserver', {'build': 'yarn install --frozen-lockfile'})
 " call dein#add('neoclide/coc-tslint-plugin', {'build': 'yarn install --frozen-lockfile'})
 " call dein#add('neoclide/coc-json', {'build': 'yarn install --frozen-lockfile'})
