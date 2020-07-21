@@ -2,7 +2,16 @@
 export DOTFILE_PWD=$(pwd)
 
 # --- installation
-sudo pacman -S neovim zsh kitty
+
+sudo pacman -S neovim zsh kitty git
+
+# yay
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+
+yay -S ttf-jetbrains-mono-git
+
 sudo npm i -g typescript neovim
 
 # todo: install py2/3 pip
