@@ -15,4 +15,4 @@ rm dein_installer.sh
 
 python -m pip install neovim
 npm i -g typescript neovim
-nvim -c "call dein#install()" -c "UpdateRemotePlugins"
+nvim -c "call dein#install()" -c "UpdateRemotePlugins" -c "q"
