@@ -1,7 +1,7 @@
 #!/bin/sh
 export DOTFILE_PWD=$(pwd)
 
-sudo pacman -S xclip ripgrep docker tig scrot python3 ttf-hack zsh neovim git kitty xorg-xinit xorg xorg-server
+sudo pacman -S xclip ripgrep tig scrot python3 ttf-hack zsh neovim kitty xorg-xinit xorg xorg-server
 
 ./git/install.sh
 
@@ -27,6 +27,8 @@ cd ..
 
 # nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 nvm install v12.18.2
 
 # fonts
