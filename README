@@ -1,1 +1,7 @@
-Ok, dont forget to open neovim at ~/.cache/dein/repos/github.com/neoclide/coc.nvim folder and do "call dein#install()", "UpdateRemotePlugins".
+********************************************************************************
+
+Ok, dont forget to open neovim at
+  ~/.cache/dein/repos/github.com/neoclide/coc.nvim folder
+  and do "call dein#install()", "UpdateRemotePlugins".
+
+********************************************************************************
