@@ -1,7 +1,7 @@
 #!/bin/sh
 export DOTFILE_PWD=$(pwd)
 
-sudo pacman -S xclip ripgrep docker tig scrot python3
+sudo pacman -S xclip ripgrep docker tig scrot python3 ttf-hack zsh neovim git kitty xorg-xinit xorg xorg-server
 
 ./git/install.sh
 
@@ -30,7 +30,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 nvm install v12.18.2
 
 # fonts
-sudo pacman -S ttf-hack
 yay -S ttf-jetbrains-mono-git
 
 # pyenv

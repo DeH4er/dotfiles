@@ -1,5 +1,4 @@
 #!/bin/sh
-sudo pacman -S neovim
 npm i -g yarn
 
 mkdir -p $HOME/.config/nvim
