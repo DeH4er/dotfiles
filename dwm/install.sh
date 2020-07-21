@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git clone git@github.com:DeH4er/dwm.git $HOME/source/dwm
+git clone https://github.com/deh4er/dwm $HOME/source/dwm
 cd $HOME/source/dwm
 sudo make clean install
 cd $DOTFILE_PWD
