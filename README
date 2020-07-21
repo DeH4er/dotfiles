@@ -1,8 +1,8 @@
 ********************************************************************************
 
 Ok, dont forget to:
-  1. Run neovim cmd "call dein#install()"
-  2. Run neovim cmd "UpdateRemotePlugins"
-  3. Logout
+  1. Logout
+  2. Run neovim cmd "call dein#install()"
+  3. Run neovim cmd "UpdateRemotePlugins"
 
 ********************************************************************************
