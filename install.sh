@@ -41,6 +41,14 @@ yay -S ttf-jetbrains-mono-git
 
 # pyenv
 curl https://pyenv.run | bash
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+pyenv install 3.8.4
+pyenv virtualenv 3.8.4 nvim
+pyenv activate nvim
+pip install pynvim
+pip install neovim
+pyenv --unset
 
 cd $DOTFILE_PWD
 

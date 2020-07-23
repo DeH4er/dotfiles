@@ -49,6 +49,7 @@ endif
 let mapleader=" "
 
 let g:elm_setup_keybindings=0
+let g:python3_host_prog = expand('$PYENV_ROOT/versions/nvim/bin/python')
 let g:UltiSnipsEditSplit="tabdo"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
 

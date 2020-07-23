@@ -54,5 +54,6 @@ alias t=tig
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
 autoload -U compinit && compinit -u
 export _JAVA_AWT_WM_NONREPARENTING=1
+export PYENV_ROOT=$(pyenv root)
 
 source $HOME/.local_zshrc
