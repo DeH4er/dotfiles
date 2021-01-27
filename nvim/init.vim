@@ -12,6 +12,7 @@ call dein#disable('junegunn/limelight.vim')
 call dein#disable('reedes/vim-pencil')
 call dein#disable('AndrewRadev/sideways.vim')
 call dein#disable('prendradjaja/vim-vertigo')
+call dein#disable('SirVer/ultisnips')
 
 call dein#begin('~/.cache/dein')
 call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
@@ -24,7 +25,6 @@ call dein#add('gruvbox-community/gruvbox')
 call dein#add('osyo-manga/vim-over')
 call dein#add('tpope/vim-projectionist')
 call dein#add('Shougo/defx.nvim')
-call dein#add('SirVer/ultisnips')
 call dein#add('tpope/vim-repeat')
 call dein#add('itchyny/lightline.vim')
 call dein#add('dyng/ctrlsf.vim')
@@ -447,3 +447,16 @@ au UIEnter * set tabline=%!MyTabLine()
 autocmd BufWritePre * %s/\s\+$//e
 call HighlightTabLine()
 set tabline=%!MyTabLine()
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
