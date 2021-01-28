@@ -1,0 +1,18 @@
+{
+  "*.ts": {
+    "alternate": "{}.html",
+    "type": "source"
+  },
+  "*.html": {
+    "alternate": "{}.ts",
+    "type": "source"
+  },
+  "*.spec.ts": {
+    "alternate": "{}.ts",
+    "type": "source"
+  },
+  "*.less": {
+    "alternate": "{}.ts",
+    "type": "source"
+  }
+}
