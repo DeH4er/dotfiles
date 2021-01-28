@@ -5,14 +5,14 @@
   },
   "*.html": {
     "alternate": "{}.ts",
-    "type": "source"
+    "type": "html"
   },
   "*.spec.ts": {
     "alternate": "{}.ts",
-    "type": "source"
+    "type": "test"
   },
   "*.less": {
     "alternate": "{}.ts",
-    "type": "source"
+    "type": "css"
   }
 }
