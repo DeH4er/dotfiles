@@ -5,6 +5,7 @@
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "yapf",
   "eslint.filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.autoFixOnSave": true,
   "codeLens.enable": true,
   "languageserver": {
     "elmLS": {

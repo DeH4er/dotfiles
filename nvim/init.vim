@@ -31,6 +31,7 @@ call dein#add('dyng/ctrlsf.vim')
 call dein#add('tpope/vim-fugitive')
 call dein#add('purescript-contrib/purescript-vim')
 call dein#add('ElmCast/elm-vim')
+call dein#add('elixir-editors/vim-elixir')
 
 " typescript
 call dein#add('HerringtonDarkholme/yats.vim')
@@ -47,13 +48,14 @@ call dein#save_state()
 endif
 
 let mapleader=" "
+" let g:user_emmet_leader_key="<C-U>"
 
 let g:elm_setup_keybindings=0
 let g:python3_host_prog = expand('$PYENV_ROOT/versions/nvim/bin/python')
 let g:UltiSnipsEditSplit="tabdo"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/UltiSnips"
 
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|ocko-gps|coverage)|(\.(swp|ico|git|svn))|(flex/.*\.(map|js))$'
+let g:ctrlp_custom_ignore = '\v[\/](deps|_build|node_modules|target|dist|ocko-gps|coverage)|(\.(swp|ico|git|svn))|(flex/.*\.(map|js))$'
 
 let g:ctrlsf_auto_focus = {
     \ "at": "start"
@@ -120,6 +122,19 @@ vnoremap <silent> <leader>j :m '>+1<cr>gv=gv
 vnoremap <silent> <leader>k :m '<-2<cr>gv=gv
 
 nnoremap <silent> <leader>u :CocList commands<cr>
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <C-q> :call coc#float#jump()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
 vnoremap <silent> <leader>u :CocList commands<cr>
 " move arguments
 " nnoremap <silent> <leader>ah :SidewaysLeft<cr>
