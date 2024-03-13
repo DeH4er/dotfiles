@@ -24,7 +24,9 @@ end
 
 local compare = require "cmp.config.compare"
 
-require("luasnip/loaders/from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({
+  paths = { "~/.config/nvim/snippets" }
+})
 
 -- local check_backspace = function()
 --   local col = vim.fn.col "." - 1
@@ -254,11 +256,11 @@ cmp.setup {
     select = false,
   },
   window = {
-    documentation = false,
-    -- documentation = {
-    --   border = "rounded",
-    --   winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
-    -- },
+    -- documentation = false,
+    documentation = {
+      border = "rounded",
+      winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",
+    },
     completion = {
       border = "rounded",
       winhighlight = "NormalFloat:Pmenu,NormalFloat:Pmenu,CursorLine:PmenuSel,Search:None",

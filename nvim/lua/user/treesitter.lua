@@ -1,4 +1,4 @@
-local disabled_extensions = {'txt'}
+local disabled_extensions = {'txt', 'log'}
 
 require 'nvim-treesitter.configs'.setup {
   sync_installed = false,

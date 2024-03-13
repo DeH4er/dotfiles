@@ -1,13 +1,13 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require 'packer'.startup(function(use)
-  use 'ellisonleao/gruvbox.nvim'
+  use 'luisiacc/gruvbox-baby'
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- utils
-  use 'folke/lua-dev.nvim'
+  use 'folke/neodev.nvim'
 
-  -- LSP use 'neovim/nvim-lspconfig' -- enable LSP
+  use 'simrat39/rust-tools.nvim'
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
@@ -27,11 +27,6 @@ return require 'packer'.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
-  -- use "hrsh7th/cmp-emoji"
-  -- use "hrsh7th/cmp-nvim-lua"
-  -- use "zbirenbaum/copilot-cmp"
-  -- use { "tzachar/cmp-tabnine", commit = "1a8fd2795e4317fd564da269cc64a2fa17ee854e",
-  -- run = "./install.sh" }
 
   -- Snippet
   use "L3MON4D3/LuaSnip"
@@ -43,14 +38,23 @@ return require 'packer'.startup(function(use)
   -- Tree
   use { 'kyazdani42/nvim-tree.lua', requires = { 'kyazdani42/nvim-web-devicons' } }
 
-  use { 'johmsalas/text-case.nvim', config = {
-    require 'textcase'.setup {}
-  } }
-
   use {
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
     end
   }
+
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      require'colorizer'.setup()
+    end
+  }
+
+  use 'f-person/git-blame.nvim'
+
+  use 'github/copilot.vim'
+
+  use 'dyng/ctrlsf.vim'
 end)

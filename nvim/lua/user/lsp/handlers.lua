@@ -1,8 +1,6 @@
 local M = {}
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = require 'cmp_nvim_lsp'.update_capabilities(M.capabilities)
+M.capabilities = require 'cmp_nvim_lsp'.default_capabilities()
 
 M.setup = function()
   local icons = require 'user.icons'
@@ -43,7 +41,7 @@ M.setup = function()
     severity_sort = true,
     float = {
       focusable = true,
-      style = "minimal",
+      -- style = "minimal",
       border = "rounded",
       -- border = {"▄","▄","▄","█","▀","▀","▀","█"},
       source = "if_many", -- Or "always"
@@ -87,7 +85,7 @@ local function lsp_keymaps(bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>Telescope lsp_implementations<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>Telescope lsp_references<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format {async=true}' ]]
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>=", "<cmd>Format<cr>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
@@ -106,7 +104,7 @@ M.on_attach = function(client, bufnr)
 
   if client.name == "tsserver" then
     require("lsp-inlayhints").on_attach(client, bufnr)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end
 
   if client.name == "jdt.ls" then

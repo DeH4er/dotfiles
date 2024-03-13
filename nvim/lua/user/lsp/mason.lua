@@ -6,8 +6,12 @@ local servers = {
   "jdtls",
   "jsonls",
   "solc",
-  "solidity_ls",
-  "sumneko_lua",
+  "tailwindcss",
+  "svelte",
+  -- "emmet_ls",
+  -- "solidity_ls",
+  -- "sumneko_lua",
+  "rust_analyzer",
   "tflint",
   "terraformls",
   "tsserver",
@@ -15,10 +19,9 @@ local servers = {
   "yamlls",
   "bashls",
   "clangd",
-  "rust_analyzer",
   "taplo",
   "zk@v0.10.1",
-  "lemminx"
+  "lemminx",
 }
 
 local settings = {
@@ -70,7 +73,7 @@ for _, server in pairs(servers) do
     -- local sumneko_opts = require "lsp.settings.sumneko_lua"
     -- opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
     -- opts = vim.tbl_deep_extend("force", require("lua-dev").setup(), opts)
-    local luadev = require'lua-dev'.setup {
+    local luadev = require'neodev'.setup {
       --   -- add any options here, or leave empty to use the default settings
       -- lspconfig = opts,
       lspconfig = {
@@ -113,14 +116,10 @@ for _, server in pairs(servers) do
   end
 
   if server == "rust_analyzer" then
-    local rust_opts = require "user.lsp.settings.rust"
+    -- local rust_opts = require "user.lsp.settings.rust"
     -- opts = vim.tbl_deep_extend("force", rust_opts, opts)
-    local rust_tools_status_ok, rust_tools = pcall(require, "rust-tools")
-    if not rust_tools_status_ok then
-      return
-    end
-
-    rust_tools.setup(rust_opts)
+    local rust_tools = require "rust-tools"
+    rust_tools.setup({server = opts})
     goto continue
   end
 

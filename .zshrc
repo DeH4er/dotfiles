@@ -1,10 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # Allow the use of any term over SSH
 export TERM='linux'
 
@@ -15,7 +11,7 @@ export TERM='linux'
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
@@ -28,28 +24,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Load Plugins
 plugins=(
 	git
-	zsh-autosuggestions
-	zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='nvim'
-fi
-
-# Aliases
-# oh-my-zsh users are encouraged to define aliases within the ZSH_CUSTOM folder
-# For a full list of active aliases, run `alias`.
-alias neofetch="neofetch --color_blocks off"
-
-# Add PATH to pip files
-PATH=/home/will/.local/bin:$PATH
+export EDITOR='nvim'
 
 # Enable Vi Mode
 bindkey -v
@@ -60,13 +40,21 @@ alias gc="git commit"
 alias co="git checkout"
 alias gb="git branch"
 alias gpl="git pull"
+alias gp="git push"
+alias gpo='git push origin "$(git symbolic-ref --short HEAD)"'
+alias st='git stash'
+alias stp='git stash pop'
 alias t="tig"
 
 function cmk() {
   mkdir -p $1 && cd $1
 }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /usr/share/nvm/init-nvm.sh
-[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+[ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+

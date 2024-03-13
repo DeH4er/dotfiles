@@ -43,7 +43,7 @@ nnoremap('>', '>>')
 vnoremap('>', '>gv')
 vnoremap('<', '<gv')
 
-nnoremap_silent('<leader>ll', ':nohlsearch<cr>')
+nnoremap_silent('<leader>l', ':nohlsearch<cr>')
 
 inoremap('jk', '<esc>')
 
@@ -76,6 +76,7 @@ nnoremap(',', '/')
 nnoremap('/', '<nop>')
 vnoremap(',', '/')
 vnoremap('/', '<nop>')
+nnoremap_silent('m', ':HopChar2<cr>')
 
 -- clipboard
 nnoremap('<leader>p', '"+p')
@@ -95,8 +96,24 @@ nnoremap_silent('<leader>\'', ':sp<cr><C-w>J:res 10<cr>:terminal<cr>i')
 
 nnoremap_silent('<leader>o', ':Telescope find_files<cr>')
 nnoremap_silent('<leader>f', ':Telescope live_grep<cr>')
+nnoremap_silent('<leader>g', ':Telescope resume<cr>')
 vnoremap_silent('<leader>f', 'y<ESC>:Telescope live_grep default_text=<c-r>0<CR>')
 
+-- tree
 nnoremap_silent('<leader><tab>', ':NvimTreeToggle<cr>')
 
-nnoremap_silent('<leader>c', ':TextCaseOpenTelescope<cr>')
+-- copilot
+vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+
+vnoremap_silent('<leader>s', '<Plug>CtrlSFVwordExec')
+nnoremap('<leader>s', '<Plug>CtrlSFPrompt')
+
+
+-- search and replace
+-- nnoremap('f', "<esc>:lua require('spectre').open_visual()<CR>")
+-- vnoremap('f', "<esc>:lua require('spectre').open_visual()<CR>")

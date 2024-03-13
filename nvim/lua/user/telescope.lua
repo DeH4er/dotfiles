@@ -7,7 +7,7 @@ require'telescope'.setup {
     selection_caret = " ",
     path_display = { "smart" },
     file_ignore_patterns = {
-      ".git/",
+      "%.git/",
       "target/",
       "docs/",
       "vendor/*",
@@ -149,6 +149,7 @@ require'telescope'.setup {
     find_files = {
       theme = "dropdown",
       previewer = false,
+      path_display = { "truncate" },
     },
     buffers = {
       theme = "dropdown",

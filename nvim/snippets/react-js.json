@@ -1,0 +1,25 @@
+{
+  "fcd": {
+    "prefix": "fcd",
+    "body": [
+      "const $TM_FILENAME_BASE = () => {",
+      "  return (",
+      "    $1",
+      "  )",
+      "};",
+      "",
+      "export default $TM_FILENAME_BASE;"
+    ]
+  },
+  "style jsx": {
+    "prefix": "st",
+    "body": [
+      "<style jsx>{`",
+      "  .a {",
+      "    $1",
+      "  }",
+      "`}",
+      "</style>"
+    ]
+  }
+}

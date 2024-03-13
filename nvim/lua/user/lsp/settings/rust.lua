@@ -1,14 +1,14 @@
 return {
   tools = {
     -- autoSetHints = false,
-    on_initialized = function()
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-        pattern = { "*.rs" },
-        callback = function()
-          vim.lsp.codelens.refresh()
-        end,
-      })
-    end,
+    -- on_initialized = function()
+    --   vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+    --     pattern = { "*.rs" },
+    --     callback = function()
+    --       vim.lsp.codelens.refresh()
+    --     end,
+    --   })
+    -- end,
 
     auto = false,
     inlay_hints = {
@@ -76,9 +76,9 @@ return {
 
     settings = {
       ["rust-analyzer"] = {
-        lens = {
-          enable = true,
-        },
+        -- lens = {
+        --   enable = true,
+        -- },
         checkOnSave = {
           command = "clippy",
         },
