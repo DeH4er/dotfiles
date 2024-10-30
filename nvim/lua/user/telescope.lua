@@ -12,6 +12,7 @@ require'telescope'.setup {
       "docs/",
       "vendor/*",
       "%.lock",
+      "pnpm-lock.yaml",
       "__pycache__/*",
       "%.sqlite3",
       "%.ipynb",

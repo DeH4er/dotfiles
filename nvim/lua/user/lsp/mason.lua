@@ -8,6 +8,10 @@ local servers = {
   "solc",
   "tailwindcss",
   "svelte",
+  "lua_ls",
+  "pylsp",
+  "pyright",
+  "intelephense",
   -- "emmet_ls",
   -- "solidity_ls",
   -- "sumneko_lua",
@@ -15,13 +19,12 @@ local servers = {
   "tflint",
   "terraformls",
   "tsserver",
-  "pyright",
   "yamlls",
   "bashls",
   "clangd",
   "taplo",
   "zk@v0.10.1",
-  "lemminx",
+  "lemminx"
 }
 
 local settings = {
@@ -45,10 +48,30 @@ require'mason-lspconfig'.setup {
 
 local lspconfig = require'lspconfig'
 
-local opts = {}
+local opts = {
+  on_attach = require("user.lsp.handlers").on_attach,
+  capabilities = require("user.lsp.handlers").capabilities,
+}
+
+lspconfig.sourcekit.setup({
+  -- cmd = {
+  --   "xcrun",
+  --   "sourcekit-lsp",
+  --   "-Xswiftc",
+  --   "-sdk",
+  --   "-Xswiftc",
+  --   "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk",
+  --   "-Xswiftc",
+  --   "-target",
+  --   "-Xswiftc",
+  --   "x86_64-apple-ios15.4-simulator",
+  -- },
+  on_attach = require("user.lsp.handlers").on_attach,
+  capabilities = require("user.lsp.handlers").capabilities,
+})
 
 for _, server in pairs(servers) do
-  opts = {
+  local opts = {
     on_attach = require("user.lsp.handlers").on_attach,
     capabilities = require("user.lsp.handlers").capabilities,
   }

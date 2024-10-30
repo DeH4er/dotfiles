@@ -39,3 +39,6 @@ vim.opt.signcolumn = 'yes'
 vim.cmd([[
   au TermClose * exe 'bd!'
 ]])
+vim.cmd([[
+  au FileType swift setlocal shiftwidth=2 tabstop=2
+]])

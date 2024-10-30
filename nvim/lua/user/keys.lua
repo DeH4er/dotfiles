@@ -112,6 +112,7 @@ vim.g.copilot_assume_mapped = true
 
 vnoremap_silent('<leader>s', '<Plug>CtrlSFVwordExec')
 nnoremap('<leader>s', '<Plug>CtrlSFPrompt')
+nnoremap('<leader>e', '<cmd>:Other<CR>')
 
 
 -- search and replace
