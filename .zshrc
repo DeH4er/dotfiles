@@ -29,12 +29,12 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
-export EDITOR='nvim'
+export EDITOR='hx'
 
 # Enable Vi Mode
 bindkey -v
 
-alias v="nvim"
+alias v="hx"
 alias gs="git status"
 alias gc="git commit"
 alias co="git checkout"
@@ -73,3 +73,21 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 alias docker-compose="docker compose"
+
+# bun completions
+[ -s "/Users/montrosesoftware/.bun/_bun" ] && source "/Users/montrosesoftware/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+source $HOME/source/dotfiles/secrets
+
+# pnpm
+export PNPM_HOME="/Users/montrosesoftware/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+source "$HOME/.cargo/env"
+export PATH="$HOME/Downloads/google-cloud-sdk/bin/:$PATH"

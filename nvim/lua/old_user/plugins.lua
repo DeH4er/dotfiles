@@ -11,7 +11,7 @@ return require 'packer'.startup(function(use)
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  -- use 'jose-elias-alvarez/null-ls.nvim' -- for formatters and linters
+  use 'jose-elias-alvarez/null-ls.nvim'                                            -- for formatters and linters
   use { 'nvimtools/none-ls.nvim', requires = { 'nvimtools/none-ls-extras.nvim' } } -- for formatters and linters
   use 'ray-x/lsp_signature.nvim'
   use 'SmiteshP/nvim-navic'
@@ -154,7 +154,7 @@ return require 'packer'.startup(function(use)
           -- @param table (filename (string), context (string), exists (boolean))
           -- @return table | boolean When an empty table or false is returned the filepicker is not openend.
           filePickerBeforeShow = function(files)
-             local filtered = vim.tbl_filter(function(file)
+            local filtered = vim.tbl_filter(function(file)
               return not file.filename:match("test.test") and not file.filename:match("test.module")
             end, files)
 

@@ -1,0 +1,9 @@
+theme = "my-gruvbox"
+
+[editor]
+gutters = ["diff", "diagnostics", "spacer"]
+mouse = false
+jump-label-alphabet = "hutenosa"
+
+[keys.insert]
+j = { k = "normal_mode"}
