@@ -28,4 +28,3 @@ q = "wclose"
 l = ":config-reload"
 o = "file_picker"
 f = "global_search"
-
