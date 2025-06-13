@@ -14,3 +14,6 @@ bindkey '^xe' edit-command-line
 bindkey '^x^e' edit-command-line
 
 bindkey '^[[Z' reverse-menu-complete
+
+WORDCHARS=''
+
