@@ -1,4 +1,4 @@
 nvim/pack
 nvim/plugin
 .DS_Store
-secrets
+zsh/secrets.sh

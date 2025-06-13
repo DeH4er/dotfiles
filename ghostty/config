@@ -1,0 +1,12 @@
+font-family = "JetBrainsMono Nerd Font"
+font-size = "16"
+theme = catppuccin-macchiato
+macos-titlebar-proxy-icon = hidden
+title = " "
+window-save-state = always
+
+keybind = cmd+enter=new_split:auto
+keybind = cmd+h=goto_split:previous
+keybind = cmd+l=goto_split:next
+# keybind = global:cmd+shift+t=toggle_quick_terminal
+keybind = cmd+.=toggle_split_zoom

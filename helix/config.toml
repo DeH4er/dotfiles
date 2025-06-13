@@ -1,9 +1,31 @@
-theme = "my-gruvbox"
+theme = "catppuccin_macchiato"
 
 [editor]
 gutters = ["diff", "diagnostics", "spacer"]
 mouse = false
-jump-label-alphabet = "hutenosa"
+jump-label-alphabet = "hutenosadigpc.mkwj"
+completion-timeout = 5
+auto-info = false
+
+[editor.statusline]
+left = ["spinner", "file-name", "read-only-indicator", "file-modification-indicator"]
+right = ["diagnostics", "selections", "register", "spacer", "position-percentage", "file-encoding"]
+
+[editor.file-picker]
+hidden = false
 
 [keys.insert]
 j = { k = "normal_mode"}
+
+[keys.normal]
+"C-h" = "jump_view_left"
+"C-l" = "jump_view_right"
+
+[keys.normal.space]
+"=" = ":format"
+m = ":write"
+q = "wclose"
+l = ":config-reload"
+o = "file_picker"
+f = "global_search"
+

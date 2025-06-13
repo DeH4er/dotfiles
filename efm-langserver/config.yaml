@@ -1,0 +1,76 @@
+version: 2
+root-markers:
+  - .git/
+lint-debounce: 1s
+# commands:
+#   - command: notepad
+#     arguments:
+#       - ${INPUT}
+#     title: メモ帳
+
+tools:
+  prettierd: &prettierd
+    format-command: >
+      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
+        ${--tab-width=tabSize}
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.json
+      - .prettierrc.js
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - .prettierrc.json5
+      - .prettierrc.mjs
+      - .prettierrc.cjs
+      - .prettierrc.toml
+
+  # prettier-css: &prettier-css
+  #   format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser css'
+
+  # prettier-scss: &prettier-scss
+  #   format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser scss'
+
+  # prettier-html: &prettier-html
+  #   format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser html'
+
+  # prettier-ts: &prettier-ts
+  #   format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser typescript'
+
+  # prettier-js: &prettier-js
+  #   format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} ${--single-quote:singleQuote} --parser javascript'
+
+  eslint: &eslint
+    lint-command: './node_modules/.bin/eslint -f visualstudio --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %rror %m"
+
+  # prettier-json: &prettier-json
+  #   format-command: './node_modules/.bin/prettier ${--tab-width:tabWidth} --parser json'
+
+languages:
+  css:
+    - <<: *prettierd
+  scss:
+    - <<: *prettierd
+  html:
+    - <<: *prettierd
+  typescript:
+    # - <<: *eslint
+    - <<: *prettierd
+  typescriptreact:
+    # - <<: *eslint
+    - <<: *prettierd
+  javascript:
+    # - <<: *eslint
+    - <<: *prettierd
+  javascriptreact:
+    # - <<: *eslint
+    - <<: *prettierd
+  json:
+    - <<: *prettierd
+  yaml:
+    - <<: *prettierd
