@@ -3,9 +3,9 @@ autoload -Uz add-zsh-hook
 
 prompt_exit_status_() {
   if [ $? -ne 0 ]; then
-    prompt_arrow_='%F{red}➜%f'
+    prompt_exit_status='%F{red}➜%f'
   else;
-    prompt_arrow_='%F{green}➜%f'
+    prompt_exit_status='%F{green}➜%f'
   fi
 }
 
@@ -14,13 +14,13 @@ prompt_git_branch_() {
 
   if [ -n "$ref" ]; then
     local branch="${ref#refs/heads/}"
-    prompt_git_=" %F{blue}git:(%f%F{red}${branch}%F{blue})%f"
+    prompt_git_branch=" %F{blue}git:(%f%F{red}${branch}%F{blue})%f"
   else;
-    prompt_git_=""
+    prompt_git_branch=""
   fi
 }
 
 add-zsh-hook precmd prompt_exit_status_
 add-zsh-hook precmd prompt_git_branch_
 
-PROMPT='${prompt_arrow_}%B  %F{cyan}%1~%f${prompt_git_}%b '
+PROMPT='%B${prompt_exit_status}  %F{cyan}%1~%f${prompt_git_branch}%b '
