@@ -15,10 +15,6 @@
 	renames = copies
 	interHunkContext = 10
 
-[show]
-	outputIndicatorNew = ' '
-	outputIndicatorOld = ' '
-
 [pager]
 	diff = diff-so-fancy | $PAGER
 
