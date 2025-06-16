@@ -1,3 +1,11 @@
+# [language-server.css-modules]
+# command = "bun"
+# args = ["/Users/montrosesoftware/projects/css-modules-language-server/src/index.ts", "--stdio"]
+
+[language-server.css-modules]
+command = "/Users/montrosesoftware/projects/css-modules-language-server-rs/target/debug/css-modules-language-server-rs"
+# args = ["/Users/montrosesoftware/projects/css-modules-language-server/src/index.ts", "--stdio"]
+
 [language-server.efm]
 command = "efm-langserver"
 
@@ -44,6 +52,7 @@ language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
   "efm",
   "eslint",
+  "css-modules"
 ]
 indent = { tab-width = 2, unit = "  " }
 auto-format = false

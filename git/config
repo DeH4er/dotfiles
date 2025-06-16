@@ -1,0 +1,60 @@
+[status]
+	showStash = true
+	showUntrackedFiles = all
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[pull]
+	default = current
+	rebase = true
+
+[diff]
+	context = 3
+	renames = copies
+	interHunkContext = 10
+
+[show]
+	outputIndicatorNew = ' '
+	outputIndicatorOld = ' '
+
+[pager]
+	diff = diff-so-fancy | $PAGER
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
+	singlekey = true
+
+[log]
+	abbrevCommit = true
+	graphColors = blue,yellow,cyan,magenta,green,red
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = -taggerdate
+
+[diff-so-fancy]
+	markEmptyLines = false
+
+[color "decorate"]
+	HEAD = red
+	branch = cyan
+	tag = green
+	remoteBranch = yellow
+
+[color "branch"]
+	current = red
+	local = default
+	remote = yellow
+	upstream = green
+	plain = blue
+
+[color "diff"]
+	meta = blue
+	frag = magenta
+	context = white
+	whitespace = yellow reverse
+	old = red
