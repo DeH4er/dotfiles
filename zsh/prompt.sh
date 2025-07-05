@@ -10,7 +10,7 @@ prompt_exit_status_() {
 }
 
 prompt_git_branch_() {
-  local ref=$(git symbolic-ref HEAD 2> /dev/null)
+  local ref=$(git symbolic-ref HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)
 
   if [ -n "$ref" ]; then
     local branch="${ref#refs/heads/}"
