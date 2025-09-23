@@ -1,0 +1,31 @@
+/* CSS variables for wallust
+ * You can use this template by adding the following to wallust.toml:
+css = { src = "wofi.css", dst = "~/.config/wofi/colors.css" }
+ */
+
+:root {
+    --wallpaper: url("/home/saatvik333/Pictures/Wallpapers/Everforest/everforest-flowers.png");
+
+    /* Special */
+    --background: #151416;
+    --foreground: #BFBDC0;
+    --cursor: #B3B1AC;
+
+    /* Colors */
+    --color0:  #504D49;
+    --color1:  #716D74;
+    --color2:  #A27474;
+    --color3:  #7D8078;
+    --color4:  #BE8877;
+    --color5:  #A8A597;
+    --color6:  #FAE8D2;
+    --color7:  #9B989D;
+    --color8:  #6C6A6E;
+    --color9:  #716D74;
+    --color10: #A27474;
+    --color11: #7D8078;
+    --color12: #BE8877;
+    --color13: #A8A597;
+    --color14: #FAE8D2;
+    --color15: #9B989D;
+}

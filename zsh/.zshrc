@@ -1,8 +1,8 @@
 # zmodload zsh/zprof
  
 export TERM='ghostty'
-export EDITOR='hx'
-export ZSH_SCRIPTS=$HOME/source/dotfiles/zsh
+export EDITOR='helix'
+export ZSH_SCRIPTS=$HOME/.config/zsh
 export PAGER='less'
 
 source $ZSH_SCRIPTS/settings.sh
@@ -14,4 +14,3 @@ source $ZSH_SCRIPTS/keys.sh
 source $ZSH_SCRIPTS/completion.sh
 
 # zprof
-
