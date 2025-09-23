@@ -6,7 +6,12 @@ alias ls="ls --color=auto"
 alias l="ls -la"
 alias ll="ls -lA"
 
-alias v="helix"
+if [[ $OSTYPE =~ "^linux" ]]; then
+  alias v="helix"
+else
+  alias v="hx"
+fi
+
 alias gs="git status --short"
 alias gl="git log --all --graph --pretty=format:'%C(magenta)%h %C(white) %an  %ar%C(auto)  %D%n%s%n'"
 alias ga="git add"
