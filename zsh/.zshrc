@@ -1,7 +1,12 @@
 # zmodload zsh/zprof
  
+if [[ $OSTYPE =~ "^linux" ]]; then
+  export EDITOR="helix"
+else
+  export EDITOR="hx"
+fi
+
 export TERM='ghostty'
-export EDITOR='helix'
 export ZSH_SCRIPTS=$HOME/.config/zsh
 export PAGER='less'
 
