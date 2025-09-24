@@ -2,9 +2,8 @@
 # command = "bun"
 # args = ["/Users/montrosesoftware/projects/css-modules-language-server/src/index.ts", "--stdio"]
 
-[language-server.css-modules]
-command = "/Users/montrosesoftware/projects/css-modules-language-server-rs/target/debug/css-modules-language-server-rs"
-# args = ["/Users/montrosesoftware/projects/css-modules-language-server/src/index.ts", "--stdio"]
+[language-server.qmlls]
+command = "qmlls6"
 
 [language-server.efm]
 command = "efm-langserver"
@@ -226,3 +225,12 @@ request = "attach"
 completion = [ { name = "lldb connect url", default = "connect://localhost:3333" }, { name = "file", completion = "filename" }, "pid" ]
 args = { attachCommands = [ "platform select remote-gdb-server", "platform connect {0}", "file {1}", "attach {2}" ] }
 
+[[language]]
+name = "qml"
+scope = "source.qml"
+file-types = ["qml"]
+language-servers = [ "qmlls" ]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+indent = { tab-width = 4, unit = "    " }
+grammar = "qmljs"
