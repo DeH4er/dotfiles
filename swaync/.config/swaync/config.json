@@ -9,9 +9,9 @@
   "control-center-margin-bottom": 10,
   "control-center-margin-left": 10,
   "control-center-layer": "top",
-  "timeout": 5,
-  "timeout-low": 3,
-  "timeout-critical": 5,
+  "timeout": 15,
+  "timeout-low": 5,
+  "timeout-critical": 15,
   "notification-window-width": 494,
   "notification-window-height": -1,
   "notification-grouping": true,
@@ -26,6 +26,12 @@
   "fit-to-screen": true,
   "relative-timestamps": true,
   "script-fail-notify": true,
+  "scripts": {
+    "sound": {
+      "exec": "play ~/.config/swaync/notification.mp3",
+      "app-name": ".*"
+    }
+  },
   "notification-2fa-action": true,
   "widgets": ["dnd", "mpris", "title", "notifications"],
   "widget-config": {

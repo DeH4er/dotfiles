@@ -1,6 +1,6 @@
 # [language-server.css-modules]
 # command = "bun"
-# args = ["/Users/montrosesoftware/projects/css-modules-language-server/src/index.ts", "--stdio"]
+# args = ["~/projects/css-modules-language-server/src/index.ts", "--stdio"]
 
 [language-server.qmlls]
 command = "qmlls6"
@@ -51,7 +51,7 @@ language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
   "efm",
   "eslint",
-  "css-modules"
+  # "css-modules"
 ]
 indent = { tab-width = 2, unit = "  " }
 auto-format = false
