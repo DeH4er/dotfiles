@@ -3,16 +3,16 @@ import Quickshell.Widgets
 import QtQuick
 
 WrapperItem {
-    Rectangle {
-        implicitWidth: 30
+    WrapperRectangle {
         implicitHeight: 25
+        topMargin: 3
+        leftMargin: 5
+        rightMargin: 5
         radius: 5
         color: Color.rosewater
 
         Text {
-            anchors.horizontalCenter: parent.horizontalCenter
             font.pointSize: 11
-            y: 3
             text: language.name
             color: Color.base
         }
@@ -26,8 +26,10 @@ WrapperItem {
         function onRawEvent(e) {
             if (e.name === 'activelayout') {
                 const [_, languageStr] = e.parse(2);
+                console.log(languageStr)
                 const map = {
-                    'English (Dvorak)': 'en',
+                    'English (Dvorak)': 'dvorak',
+                    'English (US)': 'en',
                     'Ukrainian': 'ua'
                 };
 

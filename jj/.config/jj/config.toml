@@ -1,0 +1,22 @@
+#:schema https://jj-vcs.github.io/jj/latest/config-schema.json
+[ui]
+pager = ":builtin"
+default-command = "log-tree"
+
+[git]
+auto-local-bookmark = true
+push-new-bookmarks = true
+private-commits = "description(glob:'private:*')"
+
+[aliases]
+log-tree = ["log", "-r", "ancestors(@) | descendants(@)"]
+log-remote = ["log", "-r", "@ | ancestors(remote_bookmarks().., 2) | trunk()"]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
+
+[revset-aliases]
+'closest_bookmark(to)' = 'heads(::to & bookmarks())'
+'recent()' = 'committer_date(after:"1 month ago")'
+
+[colors]
+"diff added token" = { underline = false }
+"diff removed token" = { underline = false }

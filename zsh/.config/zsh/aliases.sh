@@ -29,3 +29,4 @@ alias stp='git stash pop'
 alias t="tig"
 alias j="z"
 alias extract-here="$HOME/.config/scripts/extract-here.sh"
+alias join-bc-patient="$HOME/.config/scripts/join-bc-patient.sh"

@@ -24,3 +24,7 @@ fpath=(${ASDF_DATA_DIR:-$HOME/.asdf}/completions $fpath)
  
 # zoxide
 eval "$(zoxide init zsh)"
+
+# jj
+source <(COMPLETE=zsh jj)
+

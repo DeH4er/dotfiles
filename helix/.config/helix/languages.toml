@@ -49,10 +49,11 @@ comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
-  "efm",
+  # "efm",
   "eslint",
   # "css-modules"
 ]
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 indent = { tab-width = 2, unit = "  " }
 auto-format = false
 
@@ -68,9 +69,10 @@ comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
-  "efm",
+  # "efm",
   "eslint",
 ]
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 indent = { tab-width = 2, unit = "  " }
 auto-format = false
 
@@ -86,9 +88,10 @@ comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
-  "efm",
+  # "efm",
   "eslint",
 ]
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 indent = { tab-width = 2, unit = "  " }
 auto-format = false
 
@@ -103,9 +106,10 @@ comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = [
   { name = "typescript-language-server", except-features = [ "format" ] },
-  "efm",
+  # "efm",
   "eslint",
 ]
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 indent = { tab-width = 2, unit = "  " }
 grammar = "javascript"
 auto-format = false
@@ -118,8 +122,10 @@ file-types = ["scss"]
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = [
   { name =  "vscode-css-language-server" },
-  { name = "efm" },
+  # { name = "efm" },
+  # { name = "eslint" },
 ]
+formatter = { command = 'prettier', args = ["--parser", "scss"] }
 indent = { tab-width = 2, unit = "  " }
 auto-format = false
 
@@ -164,7 +170,8 @@ file-types = [
   "sublime-theme",
   "sublime-workspace"
 ]
-language-servers = [ "efm", "vscode-json-language-server" ]
+language-servers = [ "vscode-json-language-server" ]
+formatter = { command = 'prettier', args = ["--parser", "json"] }
 auto-format = false
 indent = { tab-width = 2, unit = "  " }
 
