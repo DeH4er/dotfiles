@@ -1,6 +1,7 @@
 #:schema https://jj-vcs.github.io/jj/latest/config-schema.json
 [ui]
 pager = ":builtin"
+diff-editor = ":builtin"
 default-command = "log-tree"
 
 [git]

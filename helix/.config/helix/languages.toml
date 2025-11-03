@@ -2,6 +2,10 @@
 # command = "bun"
 # args = ["~/projects/css-modules-language-server/src/index.ts", "--stdio"]
 
+[language-server.godot]
+command = "nc"
+args = [ "127.0.0.1", "6005"]
+
 [language-server.qmlls]
 command = "qmlls6"
 
@@ -241,3 +245,16 @@ comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 indent = { tab-width = 4, unit = "    " }
 grammar = "qmljs"
+
+[[language]]
+name = "gdscript"
+scope = "source.gdscript"
+injection-regex = "gdscript"
+language-servers = [ "godot" ]
+file-types = ["gd"]
+shebangs = []
+roots = ["project.godot"]
+auto-format = false
+formatter = { command = "gdformat", args = ["-"] }
+comment-tokens = ["#", "##"]
+indent = { tab-width = 4, unit = "\t" }
